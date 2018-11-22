@@ -7,7 +7,7 @@ iRepoter is a platform that allows users report suspicious or criminal activitie
 - CSS
 ## Pages
 - Github Page - https://boscoseries.github.io/
-- Pivotal Tracker Page - https://www.pivotaltracker.com/n/projects/2193723
+- Pivotal Tracker Page - https://www.pivotaltracker.com/n/projects/2227624
 
 ## Application Features
 * App Homepage
