@@ -1,6 +1,6 @@
 # iReporter
 
-iRepoter is a platform that allows users report suspicious or criminal activitiess in thier neighbourhooh for action by relevant authorities. iReporter enables citizen(Users) to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention E.g A bad road or bridge
+iRepoter is a platform that allows users report suspicious or criminal activitiess in thier neighbourhooh for action by relevant authorities. iReporter enables citizen (Users) to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention E.g A bad road or bridge
 
 ## Stack Used
 - HTML
