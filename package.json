@@ -1,0 +1,38 @@
+{
+  "name": "iReporter",
+  "version": "1.0.0",
+  "description": "iRepoter is a platform that allows users report suspicious or criminal activitiess in thier neighbourhooh for action by relevant authorities. iReporter enables citizen (Users) to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention E.g A bad road or bridge",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc ./node_modules/.bin/ava -v",
+    "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
+    "standard": "standard index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boscoseries/iReporter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boscoseries/iReporter/issues"
+  },
+  "homepage": "https://github.com/boscoseries/iReporter#readme",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "ava": "^0.16.0",
+    "co-exec": "^1.0",
+    "codecov": "^1.0.1",
+    "ghooks": "^1.2.4",
+    "nyc": "^10.0.0",
+    "standard": "^8.4.0"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run standard"
+    }
+  }
+}
