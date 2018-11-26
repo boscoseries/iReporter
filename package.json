@@ -1,0 +1,29 @@
+{
+  "name": "i-reporter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boscoseries/iReporter.git"
+  },
+  "author": "Johnbosco Okoror",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boscoseries/iReporter/issues"
+  },
+  "homepage": "https://github.com/boscoseries/iReporter#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
