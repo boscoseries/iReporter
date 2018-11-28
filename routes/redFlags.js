@@ -62,5 +62,17 @@ router.post("/red-flags", (req, res) => {
 	res.status(200).json({status: 200, data: record});
 });
 
+// edit the location of a red flag record
+router.put("/red-flags/:id/location", (req, res) => {
+	//look up the course and validate
+	const record = records.find(c => c.id === parseInt(req.params.id));
+	//if invalid return 404
+	if (!record || (record.type !== "red-flag")) res.status(404).json({status: 404, error: "Record not a red-flag Entry. check ./red-flags for entry types"});
+	//else Update the course
+	else record.location = req.body.location;
+	//Return the updated course
+	res.status(200).json({status: 200, data: record});
+});
+
 
 module.exports = router;
