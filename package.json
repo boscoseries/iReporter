@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test-init": "node node_modules/jasmine/bin/jasmine init",
-    "test": "nyc ./node_modules/.bin/ava -v",
+    "test": "node node_modules/jasmine/bin/jasmine",
     "start": "node index.js",
     "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "standard": "standard index.js"
