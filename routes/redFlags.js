@@ -33,11 +33,18 @@ const records = [
 	}
 ];
 
-// Get all Red-flag records
+// fetch all Red-flag records
 router.get("/red-flags", (req, res) => {
 	const record = records.filter(c => c.type === "red-flag");
-	if (!record) res.status(404).send("Record not a red-flag Entry. Try ../red-flags");
-	res.send(record);
+	if (!record) res.status(404).json({status: 404, error: "Not the correct path. Try checking /red-flags"});
+	res.status(200).json({status: 200, data: record});
+});
+
+// fetch a specific Red-flag records
+router.get("/red-flags/:id", (req, res) => {
+	const record = records.find(c => c.id === parseInt(req.params.id));
+	if (!record) res.status(404).json({status: 404, error: "Record not available"});
+	res.status(200).json({status: 200, data: record});
 });
 
 
