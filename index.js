@@ -1,13 +1,18 @@
-const express = require("express");
-const app = express();
+var express = require("express");
+var redFlags = require("./routes/redFlags");
+var home = require("./routes/index");
 
-app.get("/", (req, res) => {
-	res.send(
-		"Affirmative"
-	);
+
+var app = express();
+
+app.use(express.json());
+
+app.use("/", home);
+app.use("/api/v1", redFlags);
+
+var port = process.env.PORT || 3000;
+let server = app.listen(port, (req, res) => {
+	console.log(`Listening running on port ${server.address().port} ...`);
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, (req, res) => {
-	console.log(`Server running on port ${port}`);
-});
+module.exports = server;
