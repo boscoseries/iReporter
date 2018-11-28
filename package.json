@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test-init": "node node_modules/jasmine/bin/jasmine init",
+    "test": "nyc ./node_modules/.bin/ava -v",
+    "start": "node index.js",
+    "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
+    "standard": "standard index.js"
   },
   "repository": {
     "type": "git",
@@ -19,11 +22,24 @@
   "homepage": "https://github.com/boscoseries/iReporter#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "jasmine": "^3.3.0",
+    "ava": "^0.16.0",
+    "co-exec": "^1.0",
+    "codecov": "^1.0.1",
+    "ghooks": "^1.2.4",
+    "nyc": "^10.0.0",
+    "standard": "^8.4.0"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run standard"
+    }
   }
 }
