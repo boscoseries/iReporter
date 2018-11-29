@@ -33,7 +33,7 @@ const records = [
 	}
 ];
 
-// Get all Red-flag records
+// fetch all Red-flag records
 router.get("/red-flags", (req, res) => {
 	const record = records.filter(c => c.type === "red-flag");
 	if (!record) res.status(404).json({status: 404, error: "Not the correct path. Try checking /red-flags"});
@@ -79,9 +79,12 @@ router.put("/red-flags/:id/comment", (req, res) => {
 	//if invalid return 404
 	if (!record || (record.type !== "red-flag")) res.status(404).json({status: 404, error: "Record not a red-flag Entry. check ./red-flags for entry types"});
 	record.comment = req.body.comment;
+	//else Update the course
+	else record.location = req.body.location;
 	res.status(200).json({status: 200, data: record});
 });
 
+// delete a specific red-flag record
 router.delete("/red-flags/:id", (req, res) => {
 	//check if record with specific id exists
 	const record = records.find( c => c.id === parseInt(req.params.id));
@@ -95,6 +98,5 @@ router.delete("/red-flags/:id", (req, res) => {
 	record.status = "deleted";
 	res.status(200).json({status: 200, data: record});
 });
-
 
 module.exports = router;
