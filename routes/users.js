@@ -1,17 +1,17 @@
-//const express = require("express");
-//const router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 
-const User = [
+const Users = [
 	{ 
 		id : 1,  
 		firstname : "Jerry", 
 		lastname : "Gana", 
-		othernames : "", 
+		othernames : "Mensah", 
 		email : "jgana@gmail.com", 
 		phoneNumber : "08096793276", 
 		username : "jgana",  
-		registered : Date.now, 
+		registered : Date().toString(), 
 		isAdmin : false, 
 	},
 
@@ -19,11 +19,11 @@ const User = [
 		id : 2,  
 		firstname : "Peter", 
 		lastname : "Duru", 
-		othernames : "", 
+		othernames : "John", 
 		email : "pduru@gmail.com", 
 		phoneNumber : "07066793222", 
 		username : "jpeterduru",  
-		registered : Date.now, 
+		registered : Date().toString(), 
 		isAdmin : false, 
 	},
 
@@ -35,9 +35,17 @@ const User = [
 		email : "michaul@gmail.com", 
 		phoneNumber : "08055907608", 
 		username : "mosumah",  
-		registered : Date.now, 
+		registered : Date().toString(), 
 		isAdmin : true, 
 	}
 ];
 
-//module.exports = router;
+// fetch all Users
+router.get("/users", (req, res) => {
+	const user = Users.filter(c => c.isAdmin === false);
+	if (!user) res.status(404).json({status: 404, error: "Page not found!"});
+	res.status(200).json({status: 200, data: user});
+});
+
+
+module.exports = router;
