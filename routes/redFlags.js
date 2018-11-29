@@ -33,7 +33,7 @@ const records = [
 	}
 ];
 
-// Get all Red-flag records
+// fetch all Red-flag records
 router.get("/red-flags", (req, res) => {
 	const record = records.filter(c => c.type === "red-flag");
 	if (!record) res.status(404).json({status: 404, error: "Not the correct path. Try checking /red-flags"});
