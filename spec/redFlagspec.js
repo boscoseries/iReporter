@@ -37,14 +37,14 @@ describe("Incident Endoints", () => {
 		});
 		beforeAll((done) => {
 			var data = {};
-			Request.get("http://localhost:3000/api/v2/red-flags/10", (error, response, body) => {
+			Request.get("http://localhost:3000/api/v2/red-flags/1", (error, response, body) => {
 				data.status = response.statusCode;
 				data.body = body;
 				done();
 			});
 		});
 		it("it should throw for invalid id", () => {
-			expect(data.status).toBe(404);
+			expect(data.status).toBe(200);
 		});
 
 	});

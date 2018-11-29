@@ -1,5 +1,6 @@
 var express = require("express");
 var redFlags = require("./routes/redFlags");
+var Users = require("./routes/users");
 var home = require("./routes/index");
 
 
@@ -8,6 +9,7 @@ var app = express();
 app.use(express.json());
 
 app.use("/", home);
+app.use("/api/v1", Users);
 app.use("/api/v2", redFlags);
 
 var port = process.env.PORT || 3000;
