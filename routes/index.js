@@ -46,7 +46,7 @@ router.get("/", (req, res) => {
 });
 
 // fetch all records
-router.get("/records", (req, res) => {
+router.get("/api/records", (req, res) => {
 	res.status(200).json({status: 200, data: records});
 });
 
