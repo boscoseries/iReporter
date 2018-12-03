@@ -1,41 +1,38 @@
 const express = require("express");
+//const records = require("../routes/records");
 
 const router = express.Router();
 
 const records = [
 	{ 
 		id : 1, 
-		createdOn : Date().toString(),   
-		createdBy : 1,
-		type : "red-flag",
-		location : "Latitude: 6.6636025, Longitude: 3.289491",
-		status : "Resolved",
-		Image :	["fight.jpg", "my_img.jpg"],
-		Video :	["my_vid.mp4"],
+		createdOn : Date.now,   
+		createdBy : 1, // represents the user who created this record 
+		type : "red-flag",       // [red-flag, intervention] 
+		location : "Nigeria",   // Lat Long coordinates 
+		status : "Resolved",     // [draft, under investigation, resolved, rejected] 
 		comment : "My neighbour is a drug baron..." 
 	},
 	{ 
 		id : 2, 
-		createdOn : Date().toString(),   
-		createdBy : 2, 
-		type : "intervention", 
-		location : "Latitude: 10.37976522, Longitude: 2.57080078",
-		status : "Under investigation",
-		Images :	["my_view.jpg", "chair.jpg"],
-		Videos :	["harps.mp4"],
+		createdOn : Date.now,   
+		createdBy : 2, // represents the user who created this record 
+		type : "intervention",       // [red-flag, intervention] 
+		location : "Ghana",   // Lat Long coordinates 
+		status : "Under investigation",     // [draft, under investigation, resolved, rejected] 
 		comment : "we need government to help us..." 
 	},
 	{ 
 		id : 3, 
-		createdOn : Date().toString(),   
-		createdBy : 3, 
-		type : "red-flag", 
-		location : "Latitude: 7.59913068, Longitude: 2.99902344",
-		status : "draft",
-		Images :	["house.jpg"],
-		Videos :	["event.mp4"],
+		createdOn : Date.now,   
+		createdBy : 3, // represents the user who created this record 
+		type : "red-flag",       // [red-flag, intervention] 
+		location : "Morocco",   // Lat Long coordinates 
+		status : "draft",     // [draft, under investigation, resolved, rejected]  
 		comment : "...abcde..." 
 	}
+	
+	
 ];
 
 // fetch homepage
@@ -45,9 +42,8 @@ router.get("/", (req, res) => {
 	);
 });
 
-// fetch all records
-router.get("/api/records", (req, res) => {
-	res.status(200).json({status: 200, data: records});
+router.get("api/records", (req, res) => {
+	res.send(records);
 });
 
 

@@ -107,7 +107,7 @@ router.delete("/red-flags/:id", (req, res) => {
 	//check if record with specific id exists
 	const record = records.find( c => c.id === parseInt(req.params.id));
 	//if not return eror message
-	if (!record) res.status(404).json({status: 404, error: "Record cannot be deleted because it doesn't exist"});
+	if (!record || (record.type !== "red-flag")) res.status(404).json({status: 404, error: "Record cannot be deleted because it doesn't exist"});
 	//else delete specific record
 	const specificRecord = records.indexOf(record);
 	records.splice(specificRecord, 1);
