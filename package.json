@@ -4,11 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-init": "node node_modules/jasmine/bin/jasmine init",
-    "test": "node node_modules/jasmine/bin/jasmine",
-    "start": "node index.js",
-    "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
-    "standard": "standard index.js"
+    "test": "",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -26,20 +23,11 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "jasmine": "^3.3.0",
-    "ava": "^0.16.0",
-    "co-exec": "^1.0",
-    "codecov": "^1.0.1",
-    "ghooks": "^1.2.4",
-    "nyc": "^10.0.0",
-    "standard": "^8.4.0"
-  },
-  "config": {
-    "ghooks": {
-      "pre-commit": "npm run standard"
-    }
+    "mocha": "^5.2.0"
   }
 }

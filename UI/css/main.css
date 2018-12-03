@@ -1,0 +1,765 @@
+
+/*********** base styles ******/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@-ms-viewport {
+    width: device-width;
+}
+
+footer, 
+header, 
+section {
+    display: block;
+}
+
+body{
+	background: honeydew;
+	margin: 0px;
+	border: 0px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background: honeydew;
+}
+  h1,
+  h2,
+  h3,
+  h4 {
+      font-family: 'sans-serif';
+      font-weight: 500;
+      color: black;
+}
+
+/* Profile styles */
+
+.profile-padding {
+    padding: 2px 4px;
+}
+
+.tab-content {
+    border: 1px solid #C5D0DC;
+    padding: 16px 12px;
+    position: relative
+}
+
+.profile-picture {
+    border: 1px solid #CCC;
+    background-color: #FFF;
+    padding: 4px;
+    display: inline-block;
+    max-width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .15)
+}
+
+.profile-user-info {
+    display: table;
+    width: 98%;
+    width: calc(100% - 24px);
+    margin: 0 auto
+}
+
+.profile-info-row {
+    display: table-row
+}
+
+.profile-info-name {
+    display: table-cell;
+    border-top: 1px dotted rgb(183, 194, 204);
+    padding: 6px 10px 6px 4px;
+    font-weight: 400;
+    color: #667E99;
+    background-color: transparent;
+    width: 110px;
+    vertical-align: middle
+}
+
+.profile-info-value {
+    padding: 6px 4px 6px 6px
+}
+
+.profile-info-value>span::before {
+    display: none
+}
+
+
+/***** Margin******/
+
+.mt-1 {
+    margin-top: 1em;
+}
+
+.mr {
+    margin-right: 2em;
+}
+
+.mr-1 {
+    margin-right: 1em;
+}
+
+/* login && signup styles*/
+
+.float-right {
+    float: right;
+    margin-right: 100px;
+}
+
+.login-container {
+    width: 389px; 
+    height: 400px;
+    box-shadow: 1px 2px 5px 3px #d2cbcb; 
+    margin-top: 30px;
+    padding-bottom: 20px; 
+    background: white;
+}
+
+.signup-container {
+    width: 389px; 
+    height: 520px;
+    box-shadow: 1px 2px 5px 3px #d2cbcb; 
+    margin-top: 30px;
+    padding-bottom: 20px; 
+    background: white;
+}
+
+input, button {
+    font-family: 'Nunito sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: black;
+}
+
+input::placeholder {
+    color: black;
+    font-size: 16px;
+}
+
+.login-btn, .signup-btn {
+    margin: 15px 0px;
+    padding: 0.3em 1.5em;
+    font-family: 'Nunito sans', sans-serif;
+    font-weight: 200;
+}
+
+.login-form {
+    float: left;
+    margin: 10px;
+}
+
+.login-form {
+    float: left;
+    margin: 10px;
+}
+
+
+.login-input {
+    width: 350px;
+    border: 1px solid #C4C4C4;
+    padding: 15px;
+    margin-bottom: 1.5em;
+    background-color: #EAEAEB
+}
+
+.login-text {
+    color: green;
+    text-align: center;
+    margin-top: 1em;
+    padding: 10px;
+       
+}
+
+.login-page {
+    background: #f5f9f7; 
+    float: left; 
+    width: 100%;padding: 10px 0px;
+}
+
+.sign-text {
+    float: left;
+}
+
+.sign-style {
+    color: green; 
+    font-size: 40px; 
+    margin: 0px; 
+    margin-top: 40px;
+    padding: 15px;
+}
+.neutral {
+    text-transform: none;   
+}
+
+.sign-style-min {
+    color: #d04040;
+    margin: 0;
+    margin-bottom: 5px;
+    text-transform: capitalize; 
+    padding: 15px;
+    font-family: 'Righteous', cursive;
+    font-size: 22px;
+}
+
+
+/* dashboard styles*/
+
+
+.form-wrapper {
+    padding-top: 0px;
+    padding-bottom: 80px;
+    padding-left: 80px;
+    padding-right: 80px; 
+}
+
+.form-msg {
+    margin-left: 80px;
+    padding: 15px;
+    font-family: 'Righteous', cursive;
+    font-size: 22px;
+    color: black;
+
+}
+
+.list-group-container {
+    width: auto; 
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+    margin-top: 30px;
+    box-shadow: 1px 2px 5px 3px;
+    background-color: DimGray;
+}
+
+.list-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 15px;
+    background-color: ivory;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+
+}
+.text-white {
+  color: white !important;
+}
+.status-text {
+    font-style: italic;
+    color: blue;
+}
+  
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #252525;
+}
+
+.mt {
+    margin-top: 2em;
+    padding: 10px;
+}
+
+.float-left {
+    float: left !important;
+}
+  
+.float-right {
+    float: right !important;
+}
+  
+.float-none {
+    float: none !important;
+}
+
+.align-center{
+    text-align: center;
+}
+
+.flex-column {
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+}
+
+.justify-content-between {
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+}
+
+.align-items-start {
+    -ms-flex-align: start !important;
+    align-items: flex-start !important;
+}
+
+.d-flex {
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.spacer {
+    justify-content: space-between; 
+}
+
+.flexer {
+    display: flex;
+}
+
+
+
+/* Home Page */
+
+header {
+    float: left;
+    width: 100%;
+    padding: 5px 0px;
+    box-shadow: 0px 5px 26px #9a9999;
+    background-color: ivory;
+}
+
+section {
+    float: left; 
+    width: 100%; 
+    padding: 0px 0px;
+}
+
+.logo-name {
+    display: flex; 
+    float: left;
+}
+
+.logo-name-style {
+    color: #d04040;
+}
+
+.fast-color {
+    color: green;
+}
+
+.login-signup {
+    float: right; 
+    margin-top: 35px; 
+    margin-bottom: 8px;
+}
+
+.login-link, 
+.signup-link {
+    margin-left: 15px;
+    padding: 8px 27px;
+    background: darkslategray;
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid #194c22;
+}
+
+.login-link:hover, 
+.signup-link:hover {
+    background: black;
+	color: lightgreen;
+}
+
+.background-img {
+    background-image: linear-gradient(to right, #be1417, #e6acad);
+    background-image: url(../img/index4.jpg);
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 40%;
+}
+
+.redflag {
+    background-color: #f5f9f7;
+    margin-bottom: 0px; 
+}
+
+.redflag-wrapper {    
+    text-align: center;
+    float: left;
+    width: 100%;
+}
+.redflag-text {
+    margin-top: 0px; 
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.redflag-content {
+    float: left;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.step-1, 
+.step-2, 
+.step-3 {
+    margin-right: 0px; 
+    padding-top: 0px; 
+    text-align: center;
+    background-color: #caf84d;
+}
+
+.redflag-text-style {
+    display: grid;
+    grid: 50px;
+    list-style: none; 
+    padding: 40px;
+    background-color: skyblue;
+}                                         
+.redflag-text-style li h4 {
+    font-size: 20px; 
+    margin-bottom: 0px;
+}
+.redflag-text-style li p {
+    font-family: 'Indie Flower', cursive;
+}
+
+@media only screen and (min-width : 320px) and (max-width : 454px) {
+    .signup_link, .login_link {position: relative; bottom: 24px;}
+ }
+}
+@media only screen and (min-width : 320px) and (max-width : 741px) {
+    .logo-name-style {
+        font-size: 26px;
+ }
+}
+
+footer {
+    float: left;
+    width: 100%;
+    background: crimson;
+}
+
+.copyright {
+    text-align: center; 
+    font-size: 15px;
+}
+
+/**** add Record page styles*****/
+
+#geolocation {
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 400;
+    border: 1px;
+    padding: 0.3rem 0.7rem;
+    color: white;
+    border-radius: 0.5rem;
+    background-color: #007bff;
+}
+
+#geolocation-pad {
+    padding-top: 0.7rem; 
+}
+
+.col-md-4, .col-md-8 {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.col-md-4 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.col-md-8 {
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+
+.col-sm-3, .col-sm-9 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.input-align {
+    display: block;
+    width: 100%;
+    height: 32px;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: black;
+    background-color: #faf7d6f8;
+    background-clip: padding-box;
+    border: 1px solid #00000083;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+label > span {
+    color: black;
+    font-size: 12px;
+    font-weight: 200;
+}
+  
+.input-align::placeholder {
+    color: #00000077;
+    opacity: 1;
+}
+.radio-pad {
+    position: relative;
+    display: block;
+    padding-left: 1.25rem;
+}
+  
+.radio-pad-input {
+    position: absolute;
+    margin-top: 0.3rem;
+}
+
+.radio-pad-label {
+    margin-bottom: 0;
+}
+
+.input-align-file {
+  display: block;
+  width: 100%;
+}
+ 
+textarea.input-align {
+    height: auto;
+}
+  
+.content-flex {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+} 
+
+.content-flex > .col,
+  .content-flex > [class*="col-"] {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+input {
+  overflow: visible;
+}
+
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.input-group {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    width: 100%;
+}
+
+button {
+    border-radius: 0;
+    overflow: visible;
+}
+  
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+}
+ 
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+  
+.btn-primary:hover, #map:hover {
+    color: #fff;
+    background-color: #343fce;
+    border-color: #343fce;
+}
+
+
+
+/* Admin page styles */
+
+.sidemenu-admin {
+	float: left;
+	width: 300px;
+	background: darkslategray;
+    color: white;
+    margin-top: 40px;
+	
+}
+.data {
+	width: auto;
+	color: black;
+	padding-left:330px;
+}
+.sidemenu-admin.ul li {
+	display: inline-block;
+    padding-bottom: 10px;	
+}
+.list {
+	padding-bottom: 30px;
+    border-bottom: 3px solid grey;
+}
+.list:hover {
+	background: black;
+	color: lightgreen;
+	padding-left:10px;
+    -moz-transition: padding-left .3s ease-in;
+    -o-transition: padding-left  .3s ease-in;
+    -webkit-transition: padding-left  .3s ease-in;
+    transition: padding-left  .3s ease-in;
+}
+.list > a{
+	text-decoration:none;
+	color:white;
+}
+
+
+.mb-1rem {
+    margin-bottom: 1rem; /*--- 1rem = 16px---*/
+}
+
+.mb-1 {
+    margin-top: 100px; /*--- 1rem = 16px---*/
+}
+
+.ml-0 {
+    margin-left: 0px;
+}
+
+.background-color-ivory {
+    background-color: ivory
+}
+
+.white {
+    color: #FFF!important
+}
+
+.red {
+    color: #DD5A43!important
+}
+
+.red2 {
+    color: #E08374!important
+}
+
+.light-red {
+    color: #F77!important
+}
+
+.blue {
+    color: #478FCA!important
+}
+
+.light-blue {
+    color: #93CBF9!important
+}
+
+.green {
+    color: #69AA46!important
+}
+
+.light-green {
+    color: #B0D877!important
+}
+
+.orange {
+    color: #FF892A!important
+}
+
+.orange2 {
+    color: #FEB902!important
+}
+
+.light-orange {
+    color: #FCAC6F!important
+}
+
+.purple {
+    color: #A069C3!important
+}
+
+.pink {
+    color: #C6699F!important
+}
+
+.pink2 {
+    color: #D6487E!important
+}
+
+.brown {
+    color: brown!important
+}
+
+.grey {
+    color: #777!important
+}
+
