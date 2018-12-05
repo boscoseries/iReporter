@@ -2,6 +2,12 @@
 
 [![Build Status](https://travis-ci.org/boscoseries/iReporter.svg?branch=develop)](https://travis-ci.org/boscoseries/iReporter)
 
+[![Coverage Status](https://coveralls.io/repos/github/boscoseries/iReporter/badge.svg)](https://coveralls.io/github/boscoseries/iReporter)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/b4e160e24b809abe80a0/maintainability)](https://codeclimate.com/github/boscoseries/iReporter/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b4e160e24b809abe80a0/test_coverage)](https://codeclimate.com/github/boscoseries/iReporter/test_coverage)
+
 
 iRepoter is an application that allows users report suspicious or criminal activitiess in thier neighbourhooh for action by relevant authorities. iReporter enables citizen (Users) to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention E.g A bad road or bridge
 
@@ -41,6 +47,18 @@ https://boscoseries.github.io/iReporter/UI
 
     # Run the app
     $ npm start
+
+## API Endpoints
+```
+GET Request ->  localhost:3000/api/records
+GET Request ->  localhost:3000/api/v1/red-flags
+GET Request ->  localhost:3000/api/v1/red-flags/:id
+GET Request ->  localhost:3000/api/v1/users
+POST Request -> localhost:3000/api/v1/red-flags
+POST Request -> localhost:3000/api/v1/red-flags/:id
+PATCH Request ->  localhost:3000/api/v1/red-flags/:id/location
+PATCH Request ->  localhost:3000/api/v1/red-flags/:id/comments
+DELETE Request ->  localhost:3000/api/v1/red-flags/:id
 
 ## Tests
     $ npm test

@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 app.use("/", home);
 app.use("/api/v1", Users);
-app.use("/api/v2", redFlags);
+app.use("/api/v1", redFlags);
 
 const port = process.env.PORT || 3000;
 
