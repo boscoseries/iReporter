@@ -1,6 +1,7 @@
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const server = require("..");
+import chai from "chai";
+import chaiHttp from "chai-http";
+import server from "..";
+
 const should = chai.should();
 const expect = chai.expect;
 
@@ -50,17 +51,17 @@ describe("Incident Endpoints", () => {
 
 		/************ BUG *********/
 
-		// 	it("should throw for id not in database", (done) => {
-		// 		chai
-		// 			.request(server)
-		// 			.get("/api/v2/red-flags/10")
-		// 			.end((err, res) => {
-		// 				expect(res.status).to.equal(404);
-		// 				res.body.should.have.property("status");
-		// 				res.body.should.have.property("error");
-		// 				done();
-		// 			});
-		// 	});	
+			// it("should throw for id not in database", (done) => {
+			// 	chai
+			// 		.request(server)
+			// 		.get("/api/v2/red-flags/10")
+			// 		.end((err, res) => {
+			// 			expect(res.status).to.equal(404);
+			// 			res.body.should.have.property("status");
+			// 			res.body.should.have.property("error");
+			// 			done();
+			// 		});
+			// });	
 
 		/************ END OF BUG *********/
 	});
@@ -108,7 +109,7 @@ describe("Incident Endpoints", () => {
 		/************ BUG *********/
 
 		// it("should throw if id doesnt belong to a red-flag user", (done) => {
-		// 	const values = {
+		// 	import values = {
 		// 		"location": "Latitude: 6.663, Longitude: 3.289",
 		// 	};
 		// 	chai
