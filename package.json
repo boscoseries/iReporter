@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r @babel/register --exit",
-    "start": "nodemon -r @babel/register index.js"
+    "test": "nyc mocha -r @babel/register --exit",
+    "start": "nodemon -r @babel/register index.js",
+    "coverage": "nyc report --reporter=test-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "ghooks": "^2.0.4",
+    "nyc": "^13.1.0",
     "request": "^2.88.0"
   },
   "devDependencies": {
