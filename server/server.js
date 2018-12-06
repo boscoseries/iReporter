@@ -1,17 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import redFlags from './routes/redFlags';
-import Users from './routes/users';
-import home from './routes/index';
+import routes from './routes';
 
 
 const app = express();
 
 app.use(bodyParser.json());
 
-app.use("/", home);
-app.use("/api/v1", Users);
-app.use("/api/v1", redFlags);
+app.use(routes);
 
 const port = process.env.PORT || 3000;
 
