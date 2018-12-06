@@ -88,14 +88,14 @@ describe("Incident Endpoints", () => {
 		});
 	});
 
-	describe("PUT /api/v2/red-flags/:id/location", () => {
+	describe("PATCH /api/v2/red-flags/:id/location", () => {
 		it("should update the location a red-flag record", (done) => {
 			const values = {
 				"location": "Latitude: 6.663, Longitude: 3.289"
 			};
 			chai
 				.request(server)
-				.put("/api/v2/red-flags/1/location")
+				.patch("/api/v2/red-flags/1/location")
 				.send(values)
 				.end((err, res) => {
 					expect(res.status).to.equal(200);
@@ -114,7 +114,7 @@ describe("Incident Endpoints", () => {
 		// 	};
 		// 	chai
 		// 		.request(server)
-		// 		.put("/api/v2/red-flags/2/location")
+		// 		.patch("/api/v2/red-flags/2/location")
 		// 		.send(values)
 		// 		.end((err, res) => {
 		// 			expect(res.status).to.equal(404);
@@ -129,14 +129,14 @@ describe("Incident Endpoints", () => {
 		/************ END OF BUG *********/
 	});
 
-	describe("PUT /api/v2/red-flags/:id/comment", () => {
+	describe("PATCH /api/v2/red-flags/:id/comment", () => {
 		it("should update the location a red-flag record", (done) => {
 			const values = {
 				"comment": "....this is an edited comment..."
 			};
 			chai
 				.request(server)
-				.put("/api/v2/red-flags/1/comment")
+				.patch("/api/v2/red-flags/1/comment")
 				.send(values)
 				.end((err, res) => {
 					expect(res.status).to.equal(200);
@@ -155,7 +155,7 @@ describe("Incident Endpoints", () => {
 		// 	};
 		// 	chai
 		// 		.request(server)
-		// 		.put("/api/v2/red-flags/2/location")
+		// 		.patch("/api/v2/red-flags/2/location")
 		// 		.send(values)
 		// 		.end((err, res) => {
 		// 			expect(res.status).to.equal(404);

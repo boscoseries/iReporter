@@ -74,7 +74,7 @@ router.post("/red-flags", (req, res) => {
 });
 
 // edit the location of a red flag record
-router.put("/red-flags/:id/location", (req, res) => {
+router.patch("/red-flags/:id/location", (req, res) => {
 	//check if user with specific id exists
 	const record = records.find(c => c.id === parseInt(req.params.id));
 	//if invalid return 404
@@ -88,7 +88,7 @@ router.put("/red-flags/:id/location", (req, res) => {
 });
 
 // edit the comment of a red flag record
-router.put("/red-flags/:id/comment", (req, res) => {
+router.patch("/red-flags/:id/comment", (req, res) => {
 	//check if record with specific id exists
 	const record = records.find(c => c.id === parseInt(req.params.id));
 	//if invalid return 404
