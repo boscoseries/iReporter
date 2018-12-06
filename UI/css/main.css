@@ -15,18 +15,55 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+html,body {
+    height: 100%;
+}
+
 @-ms-viewport {
     width: device-width;
 }
 
-footer, 
-header, 
+footer,  
 section {
     display: block;
 }
 
+.section {
+    margin: 0px auto;
+    width: 60%;
+    margin-bottom: 0px;
+    background-color: ;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+ 
+.container >footer {
+    justify-content: flex-end;
+}
+
+.container > header {
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.redflag-content > div > img {
+    height: 100px;
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+}
+
+
 body{
-	background: honeydew;
+    background: honeydew;
 	margin: 0px;
 	border: 0px;
 }
@@ -37,14 +74,22 @@ label {
     font-weight: 500;
 }
 
-.container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    background: honeydew;
+.pd-right {
+    padding-right: 67px;
+    padding-top: 15px;
 }
+
+.pd-top {
+    padding-top: 15px;
+}
+
+.pd-rt {
+    padding-right: 10px;
+    padding-top: 15px;
+}
+
+
+
   h1,
   h2,
   h3,
@@ -119,8 +164,8 @@ label {
     margin-right: 2em;
 }
 
-.mr-1 {
-    margin-right: 1em;
+.mr-0 {
+    margin-right: 0px;
 }
 
 /* login && signup styles*/
@@ -165,22 +210,22 @@ input::placeholder {
     padding: 0.3em 1.5em;
     font-family: 'Nunito sans', sans-serif;
     font-weight: 200;
+    background-color: #436d6d;
+    border-radius: 10px;
+    color: white;
+
 }
 
-.login-form {
-    float: left;
-    margin: 10px;
-}
 
-.login-form {
-    float: left;
+.login-form, .signup-form {
+    float: right;
     margin: 10px;
 }
 
 
 .login-input {
     width: 350px;
-    border: 1px solid #C4C4C4;
+    border: 1px solid #457272;
     padding: 15px;
     margin-bottom: 1.5em;
     background-color: #EAEAEB
@@ -189,9 +234,8 @@ input::placeholder {
 .login-text {
     color: green;
     text-align: center;
-    margin-top: 1em;
-    padding: 10px;
-       
+    margin-top: 0px;
+    padding: 10px;      
 }
 
 .login-page {
@@ -221,7 +265,7 @@ input::placeholder {
     margin-bottom: 5px;
     text-transform: capitalize; 
     padding: 15px;
-    font-family: 'Righteous', cursive;
+    font-family:'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 22px;
 }
 
@@ -229,20 +273,17 @@ input::placeholder {
 /* dashboard styles*/
 
 
-.form-wrapper {
-    padding-top: 0px;
-    padding-bottom: 80px;
-    padding-left: 80px;
-    padding-right: 80px; 
+.form-wapper {
+    margin-left: 50px;
+    padding: 10px;
+ 
 }
 
 .form-msg {
-    margin-left: 80px;
-    padding: 15px;
+    padding-top: 15px;
     font-family: 'Righteous', cursive;
     font-size: 22px;
     color: black;
-
 }
 
 .list-group-container {
@@ -286,17 +327,20 @@ input::placeholder {
 }
 .status-text {
     font-style: italic;
-    color: blue;
 }
   
-a {
+.link-button {
+    border: 1px solid gray;
+    background-color: #414641;
+    border-radius: 5px;
+    padding: 4px;
     text-decoration: none;
-    color: blue;
+    color: white;
 }
 
 a:hover {
     text-decoration: underline;
-    color: #252525;
+    color: darkblue;
 }
 
 .mt {
@@ -408,7 +452,6 @@ section {
 }
 
 .background-img {
-    background-image: linear-gradient(to right, #be1417, #e6acad);
     background-image: url(../img/index4.jpg);
     height: 400px;
     background-position: center;
@@ -419,24 +462,25 @@ section {
 
 .redflag {
     background-color: #f5f9f7;
-    margin-bottom: 0px; 
+    margin-bottom: 10px; 
+    padding-bottom: 20px;
 }
 
-.redflag-wrapper {    
+.redflag-wrapper {  
+    height: 200px;  
     text-align: center;
     float: left;
     width: 100%;
 }
 .redflag-text {
     margin-top: 0px; 
-    margin-bottom: 15px;
+    margin-bottom: 0px;
     text-align: center;
 }
 
 .redflag-content {
-    float: left;
-    width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -477,30 +521,19 @@ section {
 footer {
     float: left;
     width: 100%;
+    padding: 0px;
     background: crimson;
+    
 }
 
 .copyright {
     text-align: center; 
     font-size: 15px;
+    color: white
 }
 
 /**** add Record page styles*****/
 
-#geolocation {
-    text-decoration: none;
-    display: inline-block;
-    font-weight: 400;
-    border: 1px;
-    padding: 0.3rem 0.7rem;
-    color: white;
-    border-radius: 0.5rem;
-    background-color: #007bff;
-}
-
-#geolocation-pad {
-    padding-top: 0.7rem; 
-}
 
 .col-md-4, .col-md-8 {
   position: relative;
@@ -555,7 +588,7 @@ label > span {
     color: #00000077;
     opacity: 1;
 }
-.radio-pad {
+.radi-pad {
     position: relative;
     display: block;
     padding-left: 1.25rem;
@@ -614,9 +647,23 @@ input[type="radio"] {
     width: 100%;
 }
 
+input[type="button"] {
+  width: 90%;
+  font-size: 0.7em;
+  text-align: center;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  font-family: 'Open Sans', sans-serif;
+  cursor: pointer;
+  border-style: solid;
+  border-radius: 8px;
+}
+
 button {
     border-radius: 0;
     overflow: visible;
+    cursor: pointer;
 }
   
 .btn {
@@ -649,12 +696,17 @@ button {
 
 .sidemenu-admin {
 	float: left;
-	width: 300px;
+    width: 300px;
 	background: darkslategray;
     color: white;
     margin-top: 40px;
 	
 }
+
+.height {
+height: 100%;
+}
+
 .data {
 	width: auto;
 	color: black;
@@ -693,6 +745,14 @@ button {
 
 .ml-0 {
     margin-left: 0px;
+}
+
+.mt-0 {
+    margin-top: 0px;
+}
+
+.mt-1 {
+    margin-top: 15px;
 }
 
 .background-color-ivory {
