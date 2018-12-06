@@ -1,5 +1,6 @@
-const express = require("express");
-//const records = require("../routes/records");
+import express from "express";
+
+//import records from "../routes/records";
 
 const router = express.Router();
 
@@ -42,9 +43,9 @@ router.get("/", (req, res) => {
 	);
 });
 
-router.get("api/records", (req, res) => {
+router.get("/api/records", (req, res) => {
 	res.send(records);
 });
 
 
-module.exports = router;
+export default router;

@@ -1,20 +1,22 @@
-var express = require("express");
-var redFlags = require("./routes/redFlags");
-var Users = require("./routes/users");
-var home = require("./routes/index");
+import express from 'express';
+import bodyParser from 'body-parser';
+import redFlags from './routes/redFlags';
+import Users from './routes/users';
+import home from './routes/index';
 
 
-var app = express();
+const app = express();
 
-app.use(express.json());
+app.use(bodyParser.json());
 
 app.use("/", home);
 app.use("/api/v1", Users);
 app.use("/api/v2", redFlags);
 
-var port = process.env.PORT || 3000;
-let server = app.listen(port, (req, res) => {
-	console.log(`Listening running on port ${server.address().port} ...`);
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+	console.log(`Listening running on port ${port} ...`);
 });
 
-module.exports = server;
+export default app;
