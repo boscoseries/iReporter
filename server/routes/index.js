@@ -5,14 +5,16 @@ const router = express.Router();
 
 // fetch homepage
 router.get("/", (req, res) => {
-	res.status(200)
-	.send("Welcome to iReporter");
+	res
+	.status(200)
+	.json("Welcome to iReporter");
 });
 
 router.get("/api/v1", (req, res) => {
-	res.json({message: 'Welcome to iReporter API'});
+	res.json('Welcome to iReporter API');
 });
 
+//router.use("/", api);
 router.use("/api/v1", incidents);
 
 export default router;

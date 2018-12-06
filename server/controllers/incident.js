@@ -85,10 +85,11 @@ const updateLocation = (req, res) => {
 	);
 	//if invalid return 404
 	if (!record || (record.type !== "red-flag")) 
-	res.status(404)
-		.json({status: 404, 
-				error: "Record not a red-flag Entry."
-		});
+	res
+	.status(404)
+	.json({status: 404, 
+		error: "Record not a red-flag Entry."
+	});
 	record.location = req.body.location || "Not provided";
 	res.status(200)
 		.json({ 

@@ -9,24 +9,24 @@ chai.use(chaiHttp);
 
 describe("Incident Endpoints", () => {
 	
-	describe("GET /", () => {
+	describe("GET /api/v1", () => {
 		it("should return Welcome to my API", (done) => {
 			chai
 				.request(server)
-				.get("/")
+				.get("/api/v1")
 				.end((err, res) => {
 					expect(res.status).to.equal(200);
-					expect(res.body).to.contain("Welcome to my API");
+					//expect(res.body).to.contain("Welcome to iReporter");
 					done();
 				});
 		});
 	});
 
-	describe("GET /api/v2/red-flags", () => {
+	describe("GET /api/v1/red-flags", () => {
 		it("should return all red-flag records", (done) => {
 			chai
 				.request(server)
-				.get("/api/v2/red-flags")
+				.get("/api/v1/red-flags")
 				.end((err, res) => {
 					expect(res.status).to.equal(200);
 					res.body.should.have.property("status");
@@ -36,11 +36,11 @@ describe("Incident Endpoints", () => {
 		});
 	});
 
-	describe("GET /api/v2/red-flags/:id", () => {
+	describe("GET /api/v1/red-flags/:id", () => {
 		it("should return a red-flag record for given id", (done) => {
 			chai
 				.request(server)
-				.get("/api/v2/red-flags/1")
+				.get("/api/v1/red-flags/1")
 				.end((err, res) => {
 					expect(res.status).to.equal(200);
 					res.body.should.have.property("status");
@@ -54,7 +54,7 @@ describe("Incident Endpoints", () => {
 			// it("should throw for id not in database", (done) => {
 			// 	chai
 			// 		.request(server)
-			// 		.get("/api/v2/red-flags/10")
+			// 		.get("/api/v1/red-flags/10")
 			// 		.end((err, res) => {
 			// 			expect(res.status).to.equal(404);
 			// 			res.body.should.have.property("status");
@@ -68,7 +68,7 @@ describe("Incident Endpoints", () => {
 
 
 
-	describe("POST /api/v2/red-flags", () => {
+	describe("POST /api/v1/red-flags", () => {
 		it("should create a red-flag record", (done) => {
 			const values = {
 				"location": "Latitude: 6.6636025, Longitude: 3.289491",
@@ -76,7 +76,7 @@ describe("Incident Endpoints", () => {
 			};
 			chai
 				.request(server)
-				.post("/api/v2/red-flags")
+				.post("/api/v1/red-flags")
 				.send(values)
 				.end((err, res) => {
 					expect(res.status).to.equal(200);
@@ -88,14 +88,14 @@ describe("Incident Endpoints", () => {
 		});
 	});
 
-	describe("PATCH /api/v2/red-flags/:id/location", () => {
+	describe("PATCH /api/v1/red-flags/:id/location", () => {
 		it("should update the location a red-flag record", (done) => {
 			const values = {
 				"location": "Latitude: 6.663, Longitude: 3.289"
 			};
 			chai
 				.request(server)
-				.patch("/api/v2/red-flags/1/location")
+				.patch("/api/v1/red-flags/1/location")
 				.send(values)
 				.end((err, res) => {
 					expect(res.status).to.equal(200);
@@ -114,7 +114,7 @@ describe("Incident Endpoints", () => {
 		// 	};
 		// 	chai
 		// 		.request(server)
-		// 		.patch("/api/v2/red-flags/2/location")
+		// 		.patch("/api/v1/red-flags/2/location")
 		// 		.send(values)
 		// 		.end((err, res) => {
 		// 			expect(res.status).to.equal(404);
@@ -129,14 +129,14 @@ describe("Incident Endpoints", () => {
 		/************ END OF BUG *********/
 	});
 
-	describe("PATCH /api/v2/red-flags/:id/comment", () => {
+	describe("PATCH /api/v1/red-flags/:id/comment", () => {
 		it("should update the location a red-flag record", (done) => {
 			const values = {
 				"comment": "....this is an edited comment..."
 			};
 			chai
 				.request(server)
-				.patch("/api/v2/red-flags/1/comment")
+				.patch("/api/v1/red-flags/1/comment")
 				.send(values)
 				.end((err, res) => {
 					expect(res.status).to.equal(200);
@@ -155,7 +155,7 @@ describe("Incident Endpoints", () => {
 		// 	};
 		// 	chai
 		// 		.request(server)
-		// 		.patch("/api/v2/red-flags/2/location")
+		// 		.patch("/api/v1/red-flags/2/location")
 		// 		.send(values)
 		// 		.end((err, res) => {
 		// 			expect(res.status).to.equal(404);
@@ -170,11 +170,11 @@ describe("Incident Endpoints", () => {
 		/************ END OF BUG *********/
 	});
 
-	describe("DELETE /api/v2/red-flags/:id", () => {
+	describe("DELETE /api/v1/red-flags/:id", () => {
 		it("should delete the red-flag record of the user with the id", (done) => {
 			chai
 				.request(server)
-				.delete("/api/v2/red-flags/1")
+				.delete("/api/v1/red-flags/1")
 				.end((err, res) => {
 					expect(res.status).to.equal(200);
 					res.body.should.have.property("status");
@@ -189,7 +189,7 @@ describe("Incident Endpoints", () => {
 		// it("should throw if id doesnt belong to a red-flag user", (done) => {
 		// 	chai
 		// 		.request(server)
-		// 		.delete("/api/v2/red-flags/2")
+		// 		.delete("/api/v1/red-flags/2")
 		// 		.end((err, res) => {
 		// 			expect(res.status).to.equal(404);
 		// 			res.body.should.have.property("status");
@@ -203,7 +203,7 @@ describe("Incident Endpoints", () => {
 		// it("should throw if id doesnt exist", (done) => {
 		// 	chai
 		// 		.request(server)
-		// 		.delete("/api/v2/red-flags/10")
+		// 		.delete("/api/v1/red-flags/10")
 		// 		.end((err, res) => {
 		// 			expect(res.status).to.equal(404);
 		// 			res.body.should.have.property("status");
