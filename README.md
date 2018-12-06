@@ -44,7 +44,7 @@ https://boscoseries.github.io/iReporter/UI
 
 ## API Endpoints
 ```
-GET Request ->  localhost:3000/api/records
+GET Request ->  localhost:3000/api/v1
 GET Request ->  localhost:3000/api/v1/red-flags
 GET Request ->  localhost:3000/api/v1/red-flags/:id
 GET Request ->  localhost:3000/api/v1/users
