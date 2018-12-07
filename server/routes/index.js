@@ -1,5 +1,5 @@
 import express from "express";
-import incidents from './incident';
+import redFlags from './redFlag';
 
 const router = express.Router();
 
@@ -14,7 +14,6 @@ router.get("/api/v1", (req, res) => {
 	res.json('Welcome to iReporter API');
 });
 
-//router.use("/", api);
-router.use("/api/v1", incidents);
+router.use("/api/v1", redFlags);
 
 export default router;
