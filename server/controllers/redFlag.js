@@ -1,6 +1,6 @@
-import records from '../model/incidents';
+import records from '../model/redFlag';
 
-const getIncidents = (req, res) => {
+const getredFlags = (req, res) => {
 const record = records.filter(c => c.type === "red-flag");
 if (!record) res.status(404).json({
   status: 404,
@@ -13,7 +13,7 @@ res.status(200).json({
 });
 };
 
-const getIncident = (req, res) => {
+const getredFlag = (req, res) => {
 const record = records.find(
   c => c.id === parseInt(req.params.id)
 );
@@ -27,7 +27,7 @@ res.status(200)
 });
 };
 
-const createIncident = (req, res) => {
+const createdFlag = (req, res) => {
 const record = {
   id : records.length + 1, 
   createdOn : Date.now,   
@@ -91,7 +91,7 @@ res.status(200).json({
 });
 }
 
-const deleteIncident = (req, res) => {
+const deletedFlag = (req, res) => {
 //check if record with specific id exists
 const record = records.find( 
   c => c.id === parseInt(req.params.id)
@@ -117,10 +117,10 @@ res.status(200)
 }
 
 export default {
-getIncidents,
-getIncident,
-createIncident,
+getredFlags,
+getredFlag,
+createdFlag,
 updateLocation,
 updateComment,
-deleteIncident
+deletedFlag
 };
