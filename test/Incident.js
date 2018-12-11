@@ -9,8 +9,8 @@ chai.use(chaiHttp);
 
 describe("Incident Endpoints", () => {
 	
-	describe("POST /api/v1/red-flags", () => {
-		it("should create a red-flag record", (done) => {
+	describe("POST /api/v1/interventions", () => {
+		it("should create an intervention record", (done) => {
 			const values = {
 				"created_by": "2",
 				"type": "red-flag",
@@ -21,7 +21,7 @@ describe("Incident Endpoints", () => {
 			};
 			chai
 				.request(server)
-				.post("/api/v1/red-flags")
+				.post("/api/v1/interventions")
 				.send(values)
 				.end((err, res) => {
 					expect(res.status).to.equal(200);
@@ -32,5 +32,4 @@ describe("Incident Endpoints", () => {
 				});
 		});
 	});
-
-	});
+});
