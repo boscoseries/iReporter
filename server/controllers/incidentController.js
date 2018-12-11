@@ -3,7 +3,12 @@ import 'babel-polyfill';
 
 
 const Incident = {
-	
+	/**
+   * Create An Incident
+   * @param {object} req 
+   * @param {object} res
+   * @returns {object} A Red-flag or Intervention object 
+   */
 	create(req, res) {
 		const text = `INSERT INTO
       incidents(created_by, type, location, status, images, videos, comment)
@@ -48,6 +53,35 @@ const Incident = {
 					status: 400,
 					error: 'Please insert correct type'
 				});
+		}
+	},
+
+	/**
+   * Get All Incident records
+   * @param {object} req 
+   * @param {object} res 
+   * @returns {object} Array containing Incidents of a particular type
+   */
+	getAll(req, res) {
+		const findAllQuery = 'SELECT * FROM incidents';
+		if (req.route.path === '/red-flags') {
+			db.query(findAllQuery)
+				.then(result => {
+					const redFlags = result.rows.filter(row => row.type === 'red-flag');
+					res.status(200).json({ status: 200, data: redFlags });
+				})
+				.catch(err => res.status(500).json({ status: 500, error: err.message }));
+		}
+		if (req.route.path === '/interventions') {
+			db.query(findAllQuery)
+				.then(result => {
+					const interventions = result.rows.filter(row => row.type === 'intervention');
+					res.json({
+						status: 200,
+						data: interventions,
+					});
+				})
+				.catch(err => res.json(err));
 		}
 	}
 };

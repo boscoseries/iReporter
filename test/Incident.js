@@ -32,4 +32,18 @@ describe("Incident Endpoints", () => {
 				});
 		});
 	});
+
+	describe("GET /api/v1/interventions", () => {
+		it("should return all red-flag records", (done) => {
+			chai
+				.request(server)
+				.get("/api/v1/interventions")
+				.end((err, res) => {
+					expect(res.status).to.equal(200);
+					res.body.should.have.property("status");
+					res.body.should.have.property("data");
+					done();
+				});
+		});
+	});
 });
