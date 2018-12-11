@@ -46,4 +46,30 @@ describe("Incident Endpoints", () => {
 				});
 		});
 	});
+
+	describe("GET /api/v1/interventions/:id", () => {
+		it("should return an incident record for given id", (done) => {
+			chai
+				.request(server)
+				.get("/api/v1/interventions/31")
+				.end((err, res) => {
+					expect(res.status).to.equal(200);
+					res.body.should.have.property("status");
+					res.body.should.have.property("data");
+					done();
+				});
+		})
+
+		it("should throw for id not in database", (done) => {
+				chai
+					.request(server)
+					.get("/api/v1/interventions/10")
+					.end((err, res) => {
+						res.body.should.have.property("status");
+						res.body.should.have.property("error");
+						done();
+					});
+			});	
+	});
+
 });

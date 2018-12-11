@@ -83,7 +83,46 @@ const Incident = {
 				})
 				.catch(err => res.json(err));
 		}
-	}
+	},
+	/**
+   * Get An Incident Record
+   * @param {object} req 
+   * @param {object} res
+   * @returns {object} One RedFlag or Intervention object
+   */
+	getOne(req, res) {
+		const findOneQuery = 'SELECT * FROM incidents WHERE id = $1';
+		if (req.route.path === '/red-flags/:id') {
+			db.query(findOneQuery, [req.params.id])
+				.then(result => {
+					const redFlag = result.rows.filter(row => row.type === 'red-flag');
+					if (!redFlag.length) {
+						res.status(404).json({ status: 404, error: 'Red-flag Record not found' })
+					} else {
+						res.status(200).json({ status: 200, data: redFlag });
+					}
+				})
+				.catch(err => res.status(400).json({ status: 500, error: err.message }))
+		} else if
+		(req.route.path === '/interventions/:id') {
+			db.query(findOneQuery, [req.params.id])
+				.then(result => {
+					const intervention = result.rows.filter(row => row.type === 'intervention');
+					if (!intervention.length) {
+						res.json({ status: 404, error: 'Intervention Record not found' })
+					} else {
+						res.status(200).json({ status: 200, data: intervention });
+					}
+				})
+				.catch(err => res.status(400).json({ status: 500, error: err.message }))
+		} else {
+			res.status(404)
+				.json({
+					status: 400,
+					error: 'Please insert correct type',
+				});
+		}
+	},
 };
 
 export default Incident;

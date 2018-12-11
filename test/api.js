@@ -1,13 +1,13 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
-import server from "../server";
+import server from "../server/index";
 
 const should = chai.should();
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe("api", () => {
+describe("API", () => {
 	
 	describe("GET /api/v1", () => {
 		it("should return Welcome to iReporter API", (done) => {
