@@ -10,7 +10,7 @@ const router = express.Router();
 router.get("/red-flags", Incident.getAll);
 
 // // fetch a specific Red-flag records
-//router.get("/red-flags/:id", Incident.getOne);
+router.get("/red-flags/:id", Incident.getOne);
 
 // Create a red flag record
 router.post("/red-flags", checkField, Incident.create);
@@ -31,7 +31,7 @@ router.post("/red-flags", checkField, Incident.create);
 router.get("/interventions", Incident.getAll);
 
 // // fetch a specific Intervention records
-// router.get("/interventions/:id", Incident.getOne);
+router.get("/interventions/:id", Incident.getOne);
 
 // Create an intervention records
 router.post("/interventions", checkField, Incident.create);
