@@ -13,7 +13,7 @@ describe("Incident Endpoints", () => {
 		it("should create an intervention record", (done) => {
 			const values = {
 				"created_by": "2",
-				"type": "red-flag",
+				"type": "intervention",
 				"location": "Lagos",
 				"images": "image1.jpg",
 				"videos": "video1.jpg",
@@ -28,6 +28,20 @@ describe("Incident Endpoints", () => {
 					res.body.should.have.property("status");
 					res.body.should.have.property("data");
 					res.body.should.be.a("object");
+					done();
+				});
+		});
+	});
+
+	describe("GET /api/v1/interventions", () => {
+		it("should return all red-flag records", (done) => {
+			chai
+				.request(server)
+				.get("/api/v1/interventions")
+				.end((err, res) => {
+					expect(res.status).to.equal(200);
+					res.body.should.have.property("status");
+					res.body.should.have.property("data");
 					done();
 				});
 		});
