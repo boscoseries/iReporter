@@ -54,6 +54,18 @@ PATCH Request ->  localhost:3000/api/v1/red-flags/:id/location
 PATCH Request ->  localhost:3000/api/v1/red-flags/:id/comments
 DELETE Request ->  localhost:3000/api/v1/red-flags/:id
 
+GET Request ->  localhost:3000/api/v1
+GET Request ->  localhost:3000/api/v1/interventions
+GET Request ->  localhost:3000/api/v1/interventions/:id
+GET Request ->  localhost:3000/api/v1/users
+POST Request -> localhost:3000/api/v1/interventions
+POST Request -> localhost:3000/api/v1/interventions/:id
+PATCH Request ->  localhost:3000/api/v1/interventions/:id/location
+PATCH Request ->  localhost:3000/api/v1/interventions/:id/comments
+PATCH Request ->  localhost:3000/api/v1/interventions/:id/status
+DELETE Request ->  localhost:3000/api/v1/interventions/:id
+
+
 ## Tests
     $ npm test
 
