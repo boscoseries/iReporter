@@ -1,10 +1,6 @@
 import db from '../database/database';
 import 'babel-polyfill';
 
-import uuidv4 from 'uuid/v4';
-
-
-
 
 /**
  * Create An Incident Record
