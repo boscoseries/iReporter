@@ -1,5 +1,5 @@
 import express from "express";
-import Incident from "../controllers/incidentController";
+import * as Incident from "../controllers/incidentController";
 import checkField from "../helpers/middlewares";
 
 const router = express.Router();
@@ -7,13 +7,13 @@ const router = express.Router();
 /*******************REDFLAG ENDPOINTS*******************/
 
 // fetch all Red-flag records
-router.get("/red-flags", Incident.getAll);
+//router.get("/red-flags", Incident.getAll);
 
 // // fetch a specific Red-flag records
-router.get("/red-flags/:id", Incident.getOne);
+//router.get("/red-flags/:id", Incident.getOne);
 
 // Create a red flag record
-router.post("/red-flags", checkField, Incident.create);
+//router.post("/red-flags", checkField, Incident.create);
 
 // edit the location of a red flag record
 // router.patch("/red-flags/:id/location", checkField, Incident.update);
@@ -28,10 +28,10 @@ router.post("/red-flags", checkField, Incident.create);
 /*******************INTERVENTION ENDPOINTS*******************/
 
 // fetch all Interventions records
-router.get("/interventions", Incident.getAll);
+//router.get("/interventions", Incident.getAll);
 
 // // fetch a specific Intervention records
-router.get("/interventions/:id", Incident.getOne);
+//router.get("/interventions/:id", Incident.getOne);
 
 // Create an intervention records
 router.post("/interventions", checkField, Incident.create);
