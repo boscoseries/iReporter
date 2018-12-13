@@ -1,6 +1,5 @@
 const { Pool } = require('pg');
 const dotenv = require('dotenv').config();
-//import * as Incident from ('./incidentModel')
 
 
 const pool = new Pool({
