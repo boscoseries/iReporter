@@ -34,7 +34,7 @@ https://boscoseries.github.io/iReporter/UI
 ## How To Use
 
     # Clone this repository
-    $ git clone https://github.com/frostyblok/Food-Fast-Food.git
+    $ git clone https://github.com/boscoseries/iReporter.git
 
     # Install dependencies
     $ npm install

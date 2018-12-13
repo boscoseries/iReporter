@@ -1,6 +1,6 @@
 import express from "express";
 import incidents from './incidentRoute';
-import users from './userRoute';
+//import users from './userRoute';
 
 const router = express.Router();
 
@@ -19,12 +19,5 @@ router.get("/api/v1", (req, res) => {
 router.use("/api/v1", incidents);
 // use userRouter
 router.use("/api/v1/auth", users);
-
-router.all('*', (req, res) => {
-	res.status(404).json({
-		status: 404,
-		error: 'Wrong Url'
-	})
-})
 
 export default router;
