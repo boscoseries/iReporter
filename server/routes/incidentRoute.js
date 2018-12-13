@@ -19,13 +19,13 @@ router.post('/red-flags', Incident.create);
 router.patch('/red-flags/:id/location', checkField, Incident.updateRedflagLocation);
 
 // update the comment of a red flag record
-//router.patch('/red-flags/:id/comment', checkField, Incident.updateRedflagComment);
+router.patch('/red-flags/:id/comment', checkField, Incident.updateRedflagComment);
 
 // update the status of a red flag record
-//router.patch('/red-flags/:id/status', checkField, Incident.updateRedflagStatus);
+router.patch('/red-flags/:id/status', checkField, Incident.updateRedflagStatus);
 
 // delete a specific red-flag record
-//router.delete('/red-flags/:id', Incident.deleteRedflagRecord);
+router.delete('/red-flags/:id', Incident.deleteRedflagRecord);
 
 
 /*******************INTERVENTION ENDPOINTS*******************/
@@ -43,12 +43,12 @@ router.post('/interventions', Incident.create);
 router.patch('/interventions/:id/location', checkField, Incident.updateInterventionLocation);
 
 // update the comment of specific interventions record
-//router.patch('/interventions/:id/comment', checkField, Incident.updateInterventionComment);
+router.patch('/interventions/:id/comment', checkField, Incident.updateInterventionComment);
 
 // update the status of specific interventions record
-//router.patch('/interventions/:id/status', checkField, Incident.updateInterventionStatus);
+router.patch('/interventions/:id/status', checkField, Incident.updateInterventionStatus);
 
 // delete a specific interventions record
-//router.delete('/interventions/:id', Incident.deleteInterventionRecord);
+router.delete('/interventions/:id', Incident.deleteInterventionRecord);
 
 export default router;

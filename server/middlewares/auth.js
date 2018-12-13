@@ -14,7 +14,7 @@ export const authentication = (req, res, next) => {
         if (error) {
           res.status(401)
               .json({ status: 401,
-                      message: 'Authentication failed',
+                      message: 'Authentication Required',
               });
         }
         req.decoded = decoded;
@@ -25,6 +25,4 @@ export const authentication = (req, res, next) => {
                 .json({ message: 'Unauthorized Access! You are not allowed to access this page.',
                 });
     }
-  }
-
-export default Auth;
+  };
