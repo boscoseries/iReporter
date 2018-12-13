@@ -1,6 +1,6 @@
 import express from "express";
 import incidents from './incidentRoute';
-import users from './userRoute';
+//import users from './userRoute';
 
 const router = express.Router();
 
