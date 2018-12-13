@@ -1,5 +1,6 @@
 import express from "express";
-import incidents from './incident';
+import incidents from './incidentRoute';
+import users from './userRoute';
 
 const router = express.Router();
 
@@ -14,6 +15,9 @@ router.get("/api/v1", (req, res) => {
 	res.json('Welcome to iReporter API');
 });
 
+// use incidentRouter
 router.use("/api/v1", incidents);
+// use userRouter
+router.use("/api/v1/auth", users);
 
 export default router;
