@@ -1,48 +1,54 @@
-import express from "express";
-import Incident from "../controllers/incidentController";
-import checkField from "../helpers/middlewares";
+import express from 'express';
+import * as Incident from '../controllers/incidentController';
+//import checkField from '../middlewares/validation';
 
 const router = express.Router();
 
 /*******************REDFLAG ENDPOINTS*******************/
 
 // fetch all Red-flag records
-router.get("/red-flags", Incident.getAll);
+router.get('/red-flags', Incident.getAllRedflags);
 
-// // fetch a specific Red-flag records
-router.get("/red-flags/:id", Incident.getOne);
+// fetch a specific Red-flag records
+router.get('/red-flags/:id', Incident.getOneRedflag);
 
 // Create a red flag record
-router.post("/red-flags", checkField, Incident.create);
+router.post('/red-flags', Incident.create);
 
-// edit the location of a red flag record
-// router.patch("/red-flags/:id/location", checkField, Incident.update);
+// update the location of a red flag record
+//router.patch('/red-flags/:id/location', checkField, Incident.updateRedflagLocation);
 
-// // edit the comment of a red flag record
-// router.patch("/red-flags/:id/comment", checkField, Incident.update);
+// update the comment of a red flag record
+//router.patch('/red-flags/:id/comment', checkField, Incident.updateRedflagComment);
 
-// // delete a specific red-flag record
-// router.delete("/red-flags/:id", Incident.delete);
+// update the status of a red flag record
+//router.patch('/red-flags/:id/status', checkField, Incident.updateRedflagStatus);
+
+// delete a specific red-flag record
+//router.delete('/red-flags/:id', Incident.deleteRedflagRecord);
 
 
 /*******************INTERVENTION ENDPOINTS*******************/
 
 // fetch all Interventions records
-router.get("/interventions", Incident.getAll);
+router.get('/interventions', Incident.getAllInterventions);
 
-// // fetch a specific Intervention records
-router.get("/interventions/:id", Incident.getOne);
+// fetch a specific Intervention records
+router.get('/interventions/:id', Incident.getOneIntervention);
 
 // Create an intervention records
-router.post("/interventions", checkField, Incident.create);
+router.post('/interventions', Incident.create);
 
-// edit the location of a red flag record
-// router.patch("/interventions/:id/location", checkField, Incident.update);
+// update the location of a specific interventions record
+//router.patch('/interventions/:id/location', checkField, Incident.updateInterventionLocation);
 
-// // edit the comment of a red flag record
-// router.patch("/interventions/:id/comment", checkField, Incident.update);
+// update the comment of specific interventions record
+//router.patch('/interventions/:id/comment', checkField, Incident.updateInterventionComment);
 
-// // delete a specific red-flag record
-// router.delete("/interventions/:id", Incident.delete);
+// update the status of specific interventions record
+//router.patch('/interventions/:id/status', checkField, Incident.updateInterventionStatus);
+
+// delete a specific interventions record
+//router.delete('/interventions/:id', Incident.deleteInterventionRecord);
 
 export default router;
