@@ -10,13 +10,13 @@ const router = express.Router();
 router.get('/red-flags', Incident.getAllRedflags);
 
 // fetch a specific Red-flag records
-//router.get('/red-flags/:id', Incident.getOneRedflag);
+router.get('/red-flags/:id', Incident.getOneRedflag);
 
 // Create a red flag record
 router.post('/red-flags', Incident.create);
 
 // update the location of a red flag record
-//router.patch('/red-flags/:id/location', checkField, Incident.updateRedflagLocation);
+router.patch('/red-flags/:id/location', checkField, Incident.updateRedflagLocation);
 
 // update the comment of a red flag record
 //router.patch('/red-flags/:id/comment', checkField, Incident.updateRedflagComment);
@@ -34,13 +34,13 @@ router.post('/red-flags', Incident.create);
 router.get('/interventions', Incident.getAllInterventions);
 
 // fetch a specific Intervention records
-//router.get('/interventions/:id', Incident.getOneIntervention);
+router.get('/interventions/:id', Incident.getOneIntervention);
 
 // Create an intervention records
 router.post('/interventions', Incident.create);
 
 // update the location of a specific interventions record
-//router.patch('/interventions/:id/location', checkField, Incident.updateInterventionLocation);
+router.patch('/interventions/:id/location', checkField, Incident.updateInterventionLocation);
 
 // update the comment of specific interventions record
 //router.patch('/interventions/:id/comment', checkField, Incident.updateInterventionComment);
