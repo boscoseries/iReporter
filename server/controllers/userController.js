@@ -1,6 +1,8 @@
 import db from '../database/database';
 import Helper from '../middlewares/helpers';
 
+import uuidv4 from 'uuid/v4';
+
 /**
  * Create A User
  * @param {object} req 
@@ -26,9 +28,10 @@ export const create = (req, res) => {
 	}
 
 	const createQuery = `INSERT INTO users(
-	firstname, lastname, othernames, phone_number, email, username, password)
-      VALUES($1, $2, $3, $4, $5, $6, $7) returning *`;
+	id, firstname, lastname, othernames, phone_number, email, username, password)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
 	const values = [
+		uuidv4(),
 		req.body.firstname,
 		req.body.lastname,
 		req.body.othernames,
@@ -42,7 +45,12 @@ export const create = (req, res) => {
 		.then(result => {
 			const token = Helper.generateToken(result.rows[0].id);
 			res.status(201)
-				.json({ token });
+			.json({
+				status: 201, data: [{
+					token: {token},
+					user: result.rows[0]
+				}]
+			});
 		})
 		.catch(error => res.status(404)
 			.json({
@@ -50,11 +58,6 @@ export const create = (req, res) => {
 				error: error.message
 			})
 		);
-	// res.status(400)
-	// 	.json({
-	// 		status: 400,
-	// 		error: error.message
-	// 	})
 };
 
 /**

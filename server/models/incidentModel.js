@@ -70,4 +70,4 @@ module.exports = {
 	dropIncidentTable
 };
 
-//require('make-runnable');
+require('make-runnable');
