@@ -69,4 +69,4 @@ module.exports = {
 	dropUserTable,
 };
 
-require('make-runnable');
+//require('make-runnable');
