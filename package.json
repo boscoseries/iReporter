@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha -r @babel/register --exit",
-    "start": "nodemon -r @babel/register server/index.js",
+    "start": "node -r @babel/register server/index.js",
+    "create": "node server/models/userModel createUserTable && node server/models/incidentModel createIncidentTable",
+    "drop": "node server/models/incidentModel dropIncidentTable && node server/models/userModel dropUserTable",
+    "migrate": "npm run drop && npm run create",
     "coverage": "nyc report --reporter=test-lcov | coveralls"
   },
   "repository": {
@@ -29,7 +32,8 @@
     "joi": "^14.3.0",
     "jsonwebtoken": "^8.4.0",
     "nyc": "^13.1.0",
-    "pg": "^7.7.1"
+    "pg": "^7.7.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",
