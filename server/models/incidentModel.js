@@ -25,7 +25,7 @@ const createIncidentTable = () => {
 			created_on TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 			created_by UUID NOT NULL,
 			type VARCHAR(128) NOT NULL,
-			location VARCHAR(128) NOT NULL,
+			location VARCHAR(128),
 			status VARCHAR(128) DEFAULT 'draft',
 			Images VARCHAR(128),
 			Videos VARCHAR(128),

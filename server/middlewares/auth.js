@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import db from '../database/database';
 
   /**
    * Verify Token
@@ -8,21 +9,39 @@ import jwt from 'jsonwebtoken';
    * @returns {object|void} response object 
    */
 export const authentication = (req, res, next) => {
-    const token = req.body.token || req.headers['x-access-token'];
+  const token = req.body.token || req.headers['x-access-token'];
     if (token) {
       jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
         if (error) {
-          res.status(401)
-              .json({ status: 401,
-                      message: 'Authentication Required',
-              });
+          return res.status(401).json({
+            status: 401,
+            error: 'Authentication failed',
+          });
         }
-        req.decoded = decoded;
-        return next();
+        if (decoded) {
+        next();
+        }
+        
       });
-    } else {
-      return res.status(403)
-                .json({ message: 'Unauthorized Access! You are not allowed to access this page.',
-                });
-    }
+     }
+  }
+
+export const adminAuthentication = (req, res, next) => {
+  const loginQuery = `SELECT * FROM users WHERE is_admin = 'true'`;
+	db.query(loginQuery)
+		.then(result => {
+			if (!result.rows[0]) {
+				return res.status(401).json({ 
+					status: 401,
+					error: 'You are not allowed to access the route'
+				});
+      } 
+      else next();
+    })
+    .catch(error => res.status(400)
+			.json({
+				status: 400,
+				error: error.message
+			})
+		);
   };

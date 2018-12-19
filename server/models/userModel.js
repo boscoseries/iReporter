@@ -17,14 +17,14 @@ const createUserTable = () => {
 	const queryText =
 		`CREATE TABLE IF NOT EXISTS
         users(
-			id UUID PRIMARY KEY,
+		  id UUID PRIMARY KEY,
 		  firstname VARCHAR(128) NOT NULL,
 		  lastname VARCHAR(128) NOT NULL,
 		  othernames VARCHAR(128),
 		  phone_number INTEGER,
 		  email VARCHAR(128) UNIQUE NOT NULL,
 		  username VARCHAR(128) UNIQUE NOT NULL,
-      password VARCHAR(128) NOT NULL,
+      	  password VARCHAR(128) NOT NULL,
 		  registered TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 		  is_admin BOOLEAN DEFAULT false
         )`;

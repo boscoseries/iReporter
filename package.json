@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha -r @babel/register --exit",
-    "start": "node -r @babel/register server/index.js",
+    "start": "nodemon -r @babel/register server/index.js",
     "create": "node server/models/userModel createUserTable && node server/models/incidentModel createIncidentTable", 
     "drop": "node server/models/userModel dropUserTable && node server/models/incidentModel dropIncidentTable",
     "migrate": "npm run drop && npm run create",

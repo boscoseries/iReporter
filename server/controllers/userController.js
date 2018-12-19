@@ -52,7 +52,7 @@ export const create = (req, res) => {
 				}]
 			});
 		})
-		.catch(error => res.status(404)
+		.catch(error => res.status(400)
 			.json({
 				status: 400,
 				error: error.message
@@ -66,24 +66,48 @@ export const create = (req, res) => {
  * @param {object} res - response
  * @returns {object} user object 
  */
-// export const login = (req, res) => {
-// 	if (!req.body.email || !req.body.password) {
-// 		return res.status(400).send({ 'message': 'Some values are missing' });
-// 	}
-// 	if (!Helper.isValidEmail(req.body.email)) {
-// 		return res.status(400).send({ 'message': 'Please enter a valid email address' });
-// 	}
-// 	const loginQuery = 'SELECT * FROM users WHERE email = $1';
-// 	db.query(text, [req.body.email])
-// 		.then(result => {
-// 			res.status(400).send({ 'message': 'The credentials you provided is incorrect' });
-// 			if (!Helper.comparePassword(rows[0].password, req.body.password)) {
-// 				return res.status(400).send({ 'message': 'The credentials you provided is incorrect' });
-// 			}
-// 			const token = Helper.generateToken(rows[0].id);
-// 			return res.status(200).send({ token });
-// 		})
-// 		.catch(err => {
-// 			res.status(400).send(error)
-// 		})
-// };
+export const login = (req, res) => {
+	if (!req.body.email || !req.body.password) {
+		return res.status(400).json({
+			 status: 400,
+			 error: 'Email and Password fields are required' 
+			});
+	}
+	if (!Helper.isValidEmail(req.body.email)) {
+		return res.status(400).json({ 
+			status: 400,
+			error: 'Enter a valid email address' 
+		});
+	}
+	const loginQuery = 'SELECT * FROM users WHERE email = $1';
+	const inputEmail = [req.body.email]
+	db.query(loginQuery, inputEmail)
+		.then(result => {
+			if (!result.rows[0]) {
+				return res.status(400).json({ 
+					status: 400,
+					error: 'Invalid login credentialsS' 
+				});
+			}
+			if (!Helper.comparePassword(result.rows[0].password, req.body.password)) {
+				res.status(400).json({
+				status: 400,	 
+				error: 'Password is incorrect' 
+			});
+			}
+			const token = Helper.generateToken(result.rows[0].id);
+			return res.status(200).json({
+				status: 200, data: [
+					{
+						token: token,
+						user: result.rows[0]
+					}]
+			});
+		})
+		.catch(error => {
+			res.status(400).json({
+				status: 400,
+				error: error.message
+			})
+		})
+};

@@ -112,7 +112,8 @@ export const getAllInterventions = (req, res) => {
 	const findAllQuery = `SELECT * FROM INCIDENTS WHERE TYPE = 'intervention'`;
 	db.query(findAllQuery)
 		.then(result => {
-			if (result.length > 1) {
+			console.log(result)
+			if (result.rowCount < 1) {
 				res.status(404).json({
 					status: 404,
 					error: 'No Record Found'
