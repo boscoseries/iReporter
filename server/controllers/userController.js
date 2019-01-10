@@ -9,7 +9,7 @@ import uuidv4 from 'uuid/v4';
  * @param {object} res
  * @returns {object} reflection object 
  */
-export const create = (req, res) => {
+export const createUser = (req, res) => {
 	const hashPassword = Helper.hashPassword(req.body.password);
 
 	if (!req.body.email || !req.body.password) {
@@ -28,8 +28,8 @@ export const create = (req, res) => {
 	}
 
 	const createQuery = `INSERT INTO users(
-	id, firstname, lastname, othernames, phone_number, email, username, password)
-      VALUES($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
+	id, firstname, lastname, othernames, phone_number, email, username, password, is_admin)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`;
 	const values = [
 		uuidv4(),
 		req.body.firstname,
@@ -38,19 +38,21 @@ export const create = (req, res) => {
 		req.body.phone_number,
 		req.body.email,
 		req.body.username,
-		hashPassword
+		hashPassword,
+		req.body.is_admin
 	]
 
 	db.query(createQuery, values)
 		.then(result => {
 			const token = Helper.generateToken(result.rows[0].id);
 			res.status(201)
-			.json({
-				status: 201, data: [{
-					token: {token},
-					user: result.rows[0]
-				}]
-			});
+				.json({
+					status: 201,
+					data: [{
+						token: token,
+						user: result.rows[0]
+					}]
+				});
 		})
 		.catch(error => res.status(400)
 			.json({
@@ -69,14 +71,14 @@ export const create = (req, res) => {
 export const login = (req, res) => {
 	if (!req.body.email || !req.body.password) {
 		return res.status(400).json({
-			 status: 400,
-			 error: 'Email and Password fields are required' 
-			});
+			status: 400,
+			error: 'Email and Password fields are required'
+		});
 	}
 	if (!Helper.isValidEmail(req.body.email)) {
-		return res.status(400).json({ 
+		return res.status(400).json({
 			status: 400,
-			error: 'Enter a valid email address' 
+			error: 'Enter a valid email address'
 		});
 	}
 	const loginQuery = 'SELECT * FROM users WHERE email = $1';
@@ -84,24 +86,24 @@ export const login = (req, res) => {
 	db.query(loginQuery, inputEmail)
 		.then(result => {
 			if (!result.rows[0]) {
-				return res.status(400).json({ 
+				return res.status(400).json({
 					status: 400,
-					error: 'Invalid login credentialsS' 
+					error: 'Email is Incorrect'
 				});
 			}
 			if (!Helper.comparePassword(result.rows[0].password, req.body.password)) {
 				res.status(400).json({
-				status: 400,	 
-				error: 'Password is incorrect' 
-			});
+					status: 400,
+					error: 'Password is incorrect'
+				});
 			}
 			const token = Helper.generateToken(result.rows[0].id);
 			return res.status(200).json({
-				status: 200, data: [
-					{
-						token: token,
-						user: result.rows[0]
-					}]
+				status: 200,
+				data: [{
+					token: token,
+					user: result.rows[0]
+				}]
 			});
 		})
 		.catch(error => {
@@ -110,4 +112,52 @@ export const login = (req, res) => {
 				error: error.message
 			})
 		})
+};
+
+
+export const getAll = (req, res) => {
+	const getQuery = 'SELECT * FROM users';
+	db.query(getQuery)
+		.then(result => {
+			if (!result.rows[0]) {
+				res.status(400).json({
+					status: 400,
+					error: 'No Users Found'
+				});
+			} else {
+				res.status(200).json({
+					status: 200,
+					data: result.rows
+				});
+			}
+		})
+		.catch(error => {
+			res.status(400).json({
+				status: 400,
+				error: error.message
+			})
+		})
+};
+
+export const deleteUser = (req, res) => {
+	const updateOneQuery = `DELETE FROM users WHERE EMAIL = $1 returning *`;
+	const values = [req.body.email];
+	db.query(updateOneQuery, values)
+		.then(result => {
+			res.status(200)
+				.json({
+					status: 200, data: [{
+						id: result.rows[0].id,
+						message: 'User record has been deleted'
+						}]
+				});
+		})
+		.catch((err) => {
+			console.log(err)
+			res.status(404)
+				.json({
+					status: 404,
+					error: err.message
+				})
+		});
 };

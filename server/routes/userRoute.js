@@ -4,8 +4,10 @@ import * as auth from '../middlewares/auth';
 
 const router = express.Router();
 
-router.post('/signup', User.create); //auth.authentication,
+router.get('/users', User.getAll); //auth.authentication,
+router.post('/signup', User.createUser); //auth.authentication,
 router.post('/login', User.login); // auth.authentication, , User.login
+router.delete('/users', User.deleteUser); // auth.authentication, , User.login
 
 
 

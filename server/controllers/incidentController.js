@@ -14,14 +14,12 @@ import uuidv4 from 'uuid/v4';
  */
 export const create = (req, res) => {
 	const createQuery = `INSERT INTO
-      incidents(id, created_by, type, location, status, images, videos, comment)
-      VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+      INCIDENTS (id, type, location, images, videos, comment)
+      VALUES($1, $2, $3, $4, $5, $6)
       returning *`;
 	const values = [
 		uuidv4(),
-		req.body.created_by,
 		req.body.type,
-		req.body.status,
 		req.body.location,
 		req.body.images,
 		req.body.videos,
@@ -30,13 +28,15 @@ export const create = (req, res) => {
 	if (req.route.path === '/red-flags' && req.body.type === 'red-flag') {
 		db.query(createQuery, values)
 			.then(result => {
-				res.status(200).json({
+				res.status(200).json(
+					{
 					status: 200, data: [
 						{
 							id: result.rows[0].id,
-							message: 'created red-flag record'
+							message: 'Created red-flag record'
 						}]
-				});
+				}
+				);
 			})
 			.catch(err => res.status(404)
 				.json({
@@ -52,7 +52,7 @@ export const create = (req, res) => {
 						status: 200, data: [
 							{
 								id: result.rows[0].id,
-								message: 'created intervention record'
+								message: 'Created intervention record'
 							}]
 					});
 				})
@@ -62,13 +62,7 @@ export const create = (req, res) => {
 						error: err.message
 					})
 				);
-		} else {
-			res.status(404)
-				.json({
-					status: 400,
-					error: 'Invalid Request'
-				});
-		}
+		 }
 };
 
 /**
@@ -81,16 +75,16 @@ export const getAllRedflags = (req, res) => {
 	const findAllQuery = `SELECT * FROM INCIDENTS WHERE TYPE = 'red-flag'`;
 	db.query(findAllQuery)
 		.then(result => {
-			if (result.length < 1) {
+			if (!result.rowCount) {
 				res.status(404).json({
-					status: 404,
-					error: 'No Record Found'
-				})
-			} else
+					status: 404, 
+					error: 'No entries found'});
+			} else {
 				res.status(200).json({
 					status: 200,
 					data: result.rows
 				});
+			}
 		})
 		.catch((err) => {
 			res.status(404)
@@ -111,26 +105,26 @@ export const getAllRedflags = (req, res) => {
 export const getAllInterventions = (req, res) => {
 	const findAllQuery = `SELECT * FROM INCIDENTS WHERE TYPE = 'intervention'`;
 	db.query(findAllQuery)
-		.then(result => {
-			console.log(result)
-			if (result.rowCount < 1) {
-				res.status(404).json({
-					status: 404,
-					error: 'No Record Found'
-				})
-			} else
-				res.status(200).json({
-					status: 200,
-					data: result.rows
-				});
-		})
-		.catch((err) => {
-			res.status(404)
-				.json({
-					status: 404,
-					error: err.message
-				})
-		});
+	.then(result => {
+		if (!result.rowCount) {
+			res.status(404).json({
+				status: 404, 
+				error: 'No entries found'
+			});
+		} else {
+			res.status(200).json({
+				status: 200,
+				data: result.rows
+			});
+		}
+	})
+	.catch((err) => {
+		res.status(404)
+			.json({
+				status: 404,
+				error: err.message
+			})
+	});
 };
 
 /**
@@ -141,12 +135,11 @@ export const getAllInterventions = (req, res) => {
  */
 export const getOneRedflag = (req, res) => {
 	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'red-flag' AND id = $1`;
-	db.query(findOneQuery)
+	db.query(findOneQuery, [req.params.id])
 		.then(result => {
-			const redFlag = result.rows[0];
 			res.status(200).json({
 				status: 200,
-				data: redFlag,
+				data: result.rows[0]
 			})
 		})
 		.catch((err) => {
@@ -156,11 +149,6 @@ export const getOneRedflag = (req, res) => {
 					error: err.message
 				})
 		});
-	res.status(404)
-		.json({
-			status: 404,
-			error: "Record Not Found"
-		})
 }
 
 /**
@@ -171,12 +159,11 @@ export const getOneRedflag = (req, res) => {
  */
 export const getOneIntervention = (req, res) => {
 	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'intervention' AND id = $1`;
-	db.query(findOneQuery)
+	db.query(findOneQuery, [req.params.id])
 		.then(result => {
-			const intervention = result.rows[0];
 			res.status(200).json({
 				status: 200,
-				data: intervention
+				data: result.rows[0]
 			})
 		})
 		.catch((err) => {
@@ -186,12 +173,7 @@ export const getOneIntervention = (req, res) => {
 					error: err.message
 				})
 		});
-	res.status(404)
-		.json({
-			status: 404,
-			error: "Record Not Found"
-		})
-}
+};
 
 
 /**
@@ -201,31 +183,19 @@ export const getOneIntervention = (req, res) => {
  * @returns {object} an updated Red-flag incident Object
  */
 export const updateRedflagLocation = (req, res) => {
-	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'red-flag' AND id = $1`;
-	const updateOneQuery = 'UPDATE incidents SET location = $1 returning *';
-	// check if :id is a red-flag record else throw
-	db.query(findOneQuery, [req.params.id])
-		.then(result => {
-			if (result.rowCount === 0) {
-				res.json({
-					status: 404,
-					message: 'Record Not Found'
-				})
-			} else {
-				//if yes, update and return required output
-				const values = [req.body.location];
+	const updateOneQuery = `UPDATE incidents SET location = $1 WHERE Id = $2 AND TYPE = $3 returning *`;
+				const values = [req.body.location, req.params.id, 'red-flag'];
 				db.query(updateOneQuery, values)
 					.then(result => {
 						res.status(200)
 							.json({
 								status: 200, data: [{
 									id: result.rows[0].id,
-									message: 'updated red-flag record\'s location'
+									new_location: result.rows[0].location,
+									message: 'Updated red-flag record\'s location'
 								}]
 							});
-					});
-			}
-		})
+					})
 		.catch((err) => {
 			res.status(404)
 				.json({
@@ -242,73 +212,21 @@ export const updateRedflagLocation = (req, res) => {
  * @returns {object} an updated intervention incident Object
  */
 export const updateInterventionLocation = (req, res) => {
-	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'intervention' AND id = $1`;
-	const updateOneQuery = 'UPDATE incidents SET location = $1 returning *';
-	// check if :id is an intervention record else throw
-	db.query(findOneQuery, [req.params.id])
-		.then(result => {
-			if (result.rowCount === 0) {
-				res.json({
-					status: 404,
-					message: 'Record Not Found'
-				})
-			} else {
-				//if yes, update and return required output
-				const values = [req.body.location];
+	const updateOneQuery = `UPDATE incidents SET location = $1 WHERE Id = $2 AND TYPE = $3 returning *`;
+				const values = [req.body.location, req.params.id, 'intervention'];
 				db.query(updateOneQuery, values)
 					.then(result => {
 						res.status(200)
 							.json({
 								status: 200, data: [{
 									id: result.rows[0].id,
-									message: 'updated intervention record\'s location'
+									new_location: result.rows[0].location,
+									message: 'Updated intervention record\'s location'
 								}]
 							});
-					});
-			}
-		})
+					})
 		.catch((err) => {
-			res.status(404)
-				.json({
-					status: 404,
-					error: err.message
-				})
-		});
-}
-
-/**
- * Update the Comment of one Redflag Incident Record
- * @param {object} req - request
- * @param {object} res - response
- * @returns {object} an updated Red-flag incident Object
- */
-export const updateRedflagComment = (req, res) => {
-	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'red-flag' AND id = $1`;
-	const updateOneQuery = 'UPDATE incidents SET comment = $1 returning *';
-	// check if :id is a red-flag record
-	db.query(findOneQuery, [req.params.id])
-		.then(result => {
-			if (result.rowCount === 0) {
-				res.json({
-					status: 404,
-					message: 'Record Not Found'
-				})
-			} else {
-				//if yes, update and return required output
-				const values = [req.body.location];
-				db.query(updateOneQuery, values)
-					.then(result => {
-						res.status(200)
-							.json({
-								status: 200, data: [{
-									id: result.rows[0].id,
-									message: 'updated red-flag record\'s comment'
-								}]
-							});
-					});
-			}
-		})
-		.catch((err) => {
+			console.log(err)
 			res.status(404)
 				.json({
 					status: 404,
@@ -318,45 +236,66 @@ export const updateRedflagComment = (req, res) => {
 };
 
 /**
- * Update the Location of one Intervention Incident Record
+ * Update the Comment of one Redflag Incident Record
  * @param {object} req - request
  * @param {object} res - response
- * @returns {object} an updated intervention incident Object
+ * @returns {object} an updated Red-flag incident Object
  */
-export const updateInterventionComment = (req, res) => {
-	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'intervention' AND id = $1`;
-	const updateOneQuery = 'UPDATE incidents SET comment = $1 returning *';
-	// check if :id is an intervention record
-	db.query(findOneQuery, [req.params.id])
-		.then(result => {
-			if (result.rowCount === 0) {
-				res.json({
-					status: 404,
-					message: 'Record Not Found'
-				})
-			} else {
-				// if yes, update and return required output
-				const values = [req.body.location];
+
+export const updateRedflagComment = (req, res) => {
+	const updateOneQuery = `UPDATE incidents SET comment = $1 WHERE Id = $2 AND TYPE = $3 returning *`;
+				const values = [req.body.comment, req.params.id, 'red-flag'];
 				db.query(updateOneQuery, values)
 					.then(result => {
 						res.status(200)
 							.json({
 								status: 200, data: [{
 									id: result.rows[0].id,
-									message: 'updated intervention record\'s comment'
+									new_comment: result.rows[0].comment,
+									message: 'Updated red-flag record\'s comment'
 								}]
 							});
-					});
-			}
-		})
+					})
 		.catch((err) => {
+			console.log(err)
 			res.status(404)
 				.json({
 					status: 404,
 					error: err.message
 				})
 		});
-}
+};
+
+/**
+ * Update the Comment of one Intervention Incident Record
+ * @param {object} req - request
+ * @param {object} res - response
+ * @returns {object} an updated intervention incident Object
+ */
+
+export const updateInterventionComment = (req, res) => {
+	const updateOneQuery = `UPDATE incidents SET comment = $1 WHERE Id = $2 AND TYPE = $3 returning *`;
+	const values = [req.body.comment, req.params.id, 'intervention'];
+	db.query(updateOneQuery, values)
+		.then(result => {
+			res.status(200)
+				.json({
+					status: 200, data: [{
+						id: result.rows[0].id,
+						new_comment: result.rows[0].comment,
+						message: 'updated intervention record\'s comment'
+					}]
+				});
+		})
+		.catch((err) => {
+			console.log(err)
+			res.status(404)
+				.json({
+					status: 404,
+					error: err.message
+				})
+		});
+};
 
 /**
  * Update the Status of one Redflag Incident
@@ -366,32 +305,21 @@ export const updateInterventionComment = (req, res) => {
  */
 
 export const updateRedflagStatus = (req, res) => {
-	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'red-flag' AND id = $1`;
-	const updateOneQuery = 'UPDATE incidents SET status = $1 returning *';
-	// check if :id is a red-flag record
-	db.query(findOneQuery, [req.params.id])
-		.then(result => {
-			if (result.rowCount === 0) {
-				res.json({
-					status: 404,
-					message: 'Record Not Found'
-				})
-			} else {
-				//if yes, update and return required output
-				const values = [req.body.status];
+	const updateOneQuery = `UPDATE incidents SET status = $1 WHERE Id = $2 AND TYPE = $3 returning *`;
+				const values = [req.body.status, req.params.id, 'red-flag'];
 				db.query(updateOneQuery, values)
 					.then(result => {
 						res.status(200)
 							.json({
 								status: 200, data: [{
 									id: result.rows[0].id,
-									message: 'updated red-flag record\'s status'
+									new_status: result.rows[0].status,
+									message: 'Updated red-flag record\'s status'
 								}]
 							});
-					});
-			}
-		})
+					})
 		.catch((err) => {
+			console.log(err)
 			res.status(404)
 				.json({
 					status: 404,
@@ -407,39 +335,28 @@ export const updateRedflagStatus = (req, res) => {
  * @returns {object} an updated intervention incident Object
  */
 export const updateInterventionStatus = (req, res) => {
-	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'intervention' AND id = $1`;
-	const updateOneQuery = 'UPDATE incidents SET status = $1 returning *';
-	// check if :id is an intervention record
-	db.query(findOneQuery, [req.params.id])
+	const updateOneQuery = `UPDATE incidents SET status = $1 WHERE Id = $2 AND TYPE = $3 returning *`;
+	const values = [req.body.status, req.params.id, 'intervention'];
+	db.query(updateOneQuery, values)
 		.then(result => {
-			if (result.rowCount === 0) {
-				res.json({
-					status: 404,
-					message: 'Record Not Found'
-				})
-			} else {
-				// if yes, update and return required output
-				const values = [req.body.status];
-				db.query(updateOneQuery, values)
-					.then(result => {
-						res.status(200)
-							.json({
-								status: 200, data: [{
-									id: result.rows[0].id,
-									message: 'updated intervention record\'s status'
-								}]
-							});
-					});
-			}
+			res.status(200)
+				.json({
+					status: 200, data: [{
+						id: result.rows[0].id,
+						new_status: result.rows[0].status,
+						message: 'updated intervention record\'s status'
+					}]
+				});
 		})
 		.catch((err) => {
+			console.log(err)
 			res.status(404)
 				.json({
 					status: 404,
 					error: err.message
 				})
 		});
-}
+};
 
 /**
  * Delete one Redflag Record
@@ -447,39 +364,29 @@ export const updateInterventionStatus = (req, res) => {
  * @param {object} res - response
  * @returns {object} an object with the :id of the deleted incident
  */
+
 export const deleteRedflagRecord = (req, res) => {
-	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'red-flag' AND id = $1`;
-	const deleteQuery = 'DELETE FROM incidents WHERE id = $1 returning *';
-	// check if :id is a red-flag record
-	db.query(findOneQuery, [req.params.id])
+	const updateOneQuery = `DELETE FROM incidents WHERE Id = $1 AND TYPE = $2 returning *`;
+	const values = [req.params.id, 'red-flag'];
+	db.query(updateOneQuery, values)
 		.then(result => {
-			if (result.rowCount === 0) {
-				res.json({
-					status: 404,
-					message: 'Record Not Found'
-				})
-			} else {
-				// if yes, delete the record
-				db.query(deleteQuery, [req.params.id])
-					.then(result => {
-						res.status(200)
-							.json({
-								status: 200, data: [{
-									id: result.rows[0].id,
-									message: 'red-flag record has been deleted'
-								}]
-							});
-					});
-			}
+			res.status(200)
+				.json({
+					status: 200, data: [{
+						id: result.rows[0].id,
+						message: 'red-flag record has been deleted'
+						}]
+				});
 		})
 		.catch((err) => {
+			console.log(err)
 			res.status(404)
 				.json({
 					status: 404,
 					error: err.message
 				})
 		});
-}
+};
 
 /**
  * Delete one Intervention Record
@@ -488,35 +395,24 @@ export const deleteRedflagRecord = (req, res) => {
  * @returns {void} an object with the :id of the deleted incident
  */
 export const deleteInterventionRecord = (req, res) => {
-	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'intervention' AND id = $1`;
-	const deleteQuery = 'DELETE FROM incidents WHERE id = $1 returning *';
-	// check if :id is a red-flag record
-	db.query(findOneQuery, [req.params.id])
+	const updateOneQuery = `DELETE FROM incidents WHERE Id = $1 AND TYPE = $2 returning *`;
+	const values = [req.params.id, 'intervention'];
+	db.query(updateOneQuery, values)
 		.then(result => {
-			if (result.rowCount === 0) {
-				res.json({
-					status: 404,
-					message: 'Record Not Found'
-				})
-			} else {
-				// if yes, delete the record
-				db.query(deleteQuery, [req.params.id])
-					.then(result => {
-						res.status(200)
-							.json({
-								status: 200, data: [{
-									id: result.rows[0].id,
-									message: 'red-flag record has been deleted'
-								}]
-							});
-					});
-			}
+			res.status(200)
+				.json({
+					status: 200, data: [{
+						id: result.rows[0].id,
+						message: 'Intervention record has been deleted'
+						}]
+				});
 		})
 		.catch((err) => {
+			console.log(err)
 			res.status(404)
 				.json({
 					status: 404,
 					error: err.message
 				})
 		});
-}
+};

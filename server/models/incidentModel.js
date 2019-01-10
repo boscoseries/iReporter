@@ -8,7 +8,7 @@ const dotenv = require('dotenv').config();
 
 
 const pool = new Pool({
-	connectionString: process.env.DATABASE_URL
+	connectionString: process.env.NODE_ENV
 });
 
 pool.on('connect', () => {
@@ -23,14 +23,12 @@ const createIncidentTable = () => {
 		`CREATE TABLE IF NOT EXISTS incidents(
 			id UUID PRIMARY KEY,
 			created_on TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-			created_by UUID NOT NULL,
 			type VARCHAR(128) NOT NULL,
 			location VARCHAR(128),
 			status VARCHAR(128) DEFAULT 'draft',
-			Images VARCHAR(128),
-			Videos VARCHAR(128),
-			comment VARCHAR(128) NOT NULL,
-			FOREIGN KEY (created_by) REFERENCES users (id) ON DELETE CASCADE
+			images VARCHAR(128),
+			videos VARCHAR(128),
+			comment VARCHAR(128) NOT NULL
       )`;
 
 	pool.query(queryText)

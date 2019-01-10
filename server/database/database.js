@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 const dotenv = require('dotenv').config();
 
 const pool = new Pool({
-	connectionString: process.env.DATABASE_URL
+	connectionString: process.env.NODE_ENV
 });
 
 pool.on('connect', () => {

@@ -1,6 +1,10 @@
 import jwt from 'jsonwebtoken';
 import db from '../database/database';
 
+// import env from 'dotenv';
+
+// env.config();
+
   /**
    * Verify Token
    * @param {object} req 
@@ -10,7 +14,12 @@ import db from '../database/database';
    */
 export const authentication = (req, res, next) => {
   const token = req.body.token || req.headers['x-access-token'];
-    if (token) {
+    if (!token) {
+      return res.status(401).json({
+        status: 401,
+        error: 'Access Token is required',
+      });
+    } else {
       jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
         if (error) {
           return res.status(401).json({
