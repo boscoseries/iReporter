@@ -1,12 +1,6 @@
 const { Pool } = require('pg');
 const dotenv = require('dotenv').config();
 
-
-
-
-
-
-
 const pool = new Pool({
 	connectionString: process.env.NODE_ENV
 });
@@ -23,12 +17,14 @@ const createIncidentTable = () => {
 		`CREATE TABLE IF NOT EXISTS incidents(
 			id UUID PRIMARY KEY,
 			created_on TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+			created_by UUID,
 			type VARCHAR(128) NOT NULL,
 			location VARCHAR(128),
 			status VARCHAR(128) DEFAULT 'draft',
 			images VARCHAR(128),
 			videos VARCHAR(128),
-			comment VARCHAR(128) NOT NULL
+			comment VARCHAR(128) NOT NULL,
+			FOREIGN KEY (created_by) REFERENCES users (id) ON DELETE CASCADE
       )`;
 
 	pool.query(queryText)

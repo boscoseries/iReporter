@@ -14,11 +14,12 @@ import uuidv4 from 'uuid/v4';
  */
 export const create = (req, res) => {
 	const createQuery = `INSERT INTO
-      INCIDENTS (id, type, location, images, videos, comment)
-      VALUES($1, $2, $3, $4, $5, $6)
+      INCIDENTS (id, created_by, type, location, images, videos, comment)
+      VALUES($1, $2, $3, $4, $5, $6, $7)
       returning *`;
 	const values = [
 		uuidv4(),
+		req.body.created_by,
 		req.body.type,
 		req.body.location,
 		req.body.images,
@@ -28,8 +29,7 @@ export const create = (req, res) => {
 	if (req.route.path === '/red-flags' && req.body.type === 'red-flag') {
 		db.query(createQuery, values)
 			.then(result => {
-				res.status(200).json(
-					{
+				res.status(200).json({
 					status: 200, data: [
 						{
 							id: result.rows[0].id,

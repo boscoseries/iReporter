@@ -147,7 +147,7 @@ export const deleteUser = (req, res) => {
 			res.status(200)
 				.json({
 					status: 200, data: [{
-						id: result.rows[0].id,
+						email: result.rows[0].email,
 						message: 'User record has been deleted'
 						}]
 				});
