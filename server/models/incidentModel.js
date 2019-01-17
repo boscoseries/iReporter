@@ -15,9 +15,9 @@ pool.on('connect', () => {
 const createIncidentTable = () => {
 	const queryText =
 		`CREATE TABLE IF NOT EXISTS incidents(
-			id UUID PRIMARY KEY,
+			id SERIAL PRIMARY KEY,
 			created_on TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-			created_by UUID,
+			created_by BIGINT,
 			type VARCHAR(128) NOT NULL,
 			location VARCHAR(128),
 			status VARCHAR(128) DEFAULT 'draft',

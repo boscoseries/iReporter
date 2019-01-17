@@ -14,11 +14,11 @@ import uuidv4 from 'uuid/v4';
  */
 export const create = (req, res) => {
 	const createQuery = `INSERT INTO
-      INCIDENTS (id, created_by, type, location, images, videos, comment)
-      VALUES($1, $2, $3, $4, $5, $6, $7)
+      INCIDENTS (created_by, type, location, images, videos, comment)
+      VALUES($1, $2, $3, $4, $5, $6)
       returning *`;
 	const values = [
-		uuidv4(),
+		//uuidv4(),
 		req.body.created_by,
 		req.body.type,
 		req.body.location,
@@ -38,9 +38,9 @@ export const create = (req, res) => {
 				}
 				);
 			})
-			.catch(err => res.status(404)
+			.catch(err => res.status(400)
 				.json({
-					status: 404,
+					status: 400,
 					error: err.message
 				})
 			);
@@ -48,17 +48,17 @@ export const create = (req, res) => {
 		if (req.route.path === '/interventions' && req.body.type === 'intervention') {
 			db.query(createQuery, values)
 				.then(result => {
-					res.status(200).json({
-						status: 200, data: [
-							{
+					res.status(201).json({
+						status: 201, 
+						data: [{
 								id: result.rows[0].id,
 								message: 'Created intervention record'
 							}]
 					});
 				})
-				.catch(err => res.status(404)
+				.catch(err => res.status(400)
 					.json({
-						status: 404,
+						status: 400,
 						error: err.message
 					})
 				);
@@ -78,7 +78,7 @@ export const getAllRedflags = (req, res) => {
 			if (!result.rowCount) {
 				res.status(404).json({
 					status: 404, 
-					error: 'No entries found'});
+					error: 'No Redflag records found'});
 			} else {
 				res.status(200).json({
 					status: 200,
@@ -109,7 +109,7 @@ export const getAllInterventions = (req, res) => {
 		if (!result.rowCount) {
 			res.status(404).json({
 				status: 404, 
-				error: 'No entries found'
+				error: 'No Intervention records found'
 			});
 		} else {
 			res.status(200).json({
@@ -135,12 +135,22 @@ export const getAllInterventions = (req, res) => {
  */
 export const getOneRedflag = (req, res) => {
 	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'red-flag' AND id = $1`;
+	const userId = [req.params.id]
 	db.query(findOneQuery, [req.params.id])
 		.then(result => {
-			res.status(200).json({
+			if (!result.rowCount) {
+				res.status(404)
+				.json({
+					status: 404,
+					error: `No record available for user with id ${userId}`
+				})
+			} else {
+				res.status(200)
+				 .json({
 				status: 200,
 				data: result.rows[0]
 			})
+		}
 		})
 		.catch((err) => {
 			res.status(404)
@@ -149,7 +159,7 @@ export const getOneRedflag = (req, res) => {
 					error: err.message
 				})
 		});
-}
+};
 
 /**
  * Get One Intervention Incident Record
@@ -159,12 +169,22 @@ export const getOneRedflag = (req, res) => {
  */
 export const getOneIntervention = (req, res) => {
 	const findOneQuery = `SELECT * FROM incidents WHERE TYPE = 'intervention' AND id = $1`;
+	const userId = [req.params.id]
 	db.query(findOneQuery, [req.params.id])
 		.then(result => {
-			res.status(200).json({
+			if (!result.rowCount) {
+				res.status(404)
+				.json({
+					status: 404,
+					error: `No record available for user with id ${userId}`
+				})
+			} else {
+				res.status(200)
+				 .json({
 				status: 200,
 				data: result.rows[0]
 			})
+		}
 		})
 		.catch((err) => {
 			res.status(404)

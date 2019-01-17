@@ -5,7 +5,7 @@ const checkFields = (req, res, next) => {
     type: Joi.string().required(),
     location: Joi.string().min(3).required(),
     comment: Joi.string().min(5).required(),
-    created_by: Joi.number().required(),
+    created_by: Joi.string().required(),
     status: Joi.string(),
     images: Joi.string(),
     videos: Joi.string(),

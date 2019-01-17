@@ -7,23 +7,23 @@ const router = express.Router();
 
 /*******************REDFLAG ENDPOINTS*******************/
 
-router.get('/red-flags', auth.adminAuthentication, Incident.getAllRedflags); 
-router.get('/red-flags/:id', auth.authentication, Incident.getOneRedflag); 
-router.post('/red-flags', checkField,  auth.authentication, Incident.create); 
-router.patch('/red-flags/:id/location', auth.authentication, Incident.updateRedflagLocation);
-router.patch('/red-flags/:id/comment', auth.authentication, Incident.updateRedflagComment);
-router.patch('/red-flags/:id/status', auth.adminAuthentication, Incident.updateRedflagStatus);
-router.delete('/red-flags/:id', auth.authentication, Incident.deleteRedflagRecord);
+router.get('/red-flags', Incident.getAllRedflags); // auth.adminAuthentication,
+router.get('/red-flags/:id', Incident.getOneRedflag); //auth.authentication, 
+router.post('/red-flags', Incident.create); //checkField,  auth.authentication, 
+router.patch('/red-flags/:id/location', Incident.updateRedflagLocation); // auth.authentication,
+router.patch('/red-flags/:id/comment', Incident.updateRedflagComment); //auth.authentication, 
+router.patch('/red-flags/:id/status', Incident.updateRedflagStatus); //auth.adminAuthentication, 
+router.delete('/red-flags/:id', Incident.deleteRedflagRecord); //auth.authentication, 
 
 
 /*******************INTERVENTION ENDPOINTS*******************/
 
-router.get('/interventions', auth.adminAuthentication, Incident.getAllInterventions);
-router.get('/interventions/:id', auth.authentication, Incident.getOneIntervention);
-router.post('/interventions', checkField,  auth.authentication, Incident.create); 
-router.patch('/interventions/:id/location', auth.authentication, Incident.updateInterventionLocation); 
-router.patch('/interventions/:id/comment', auth.authentication, Incident.updateInterventionComment); 
-router.patch('/interventions/:id/status', auth.adminAuthentication, Incident.updateInterventionStatus);
-router.delete('/interventions/:id', auth.authentication, Incident.deleteInterventionRecord);  
+router.get('/interventions', Incident.getAllInterventions); //, auth.adminAuthentication, 
+router.get('/interventions/:id', Incident.getOneIntervention);//auth.authentication, 
+router.post('/interventions', Incident.create); //checkField,  auth.authentication, 
+router.patch('/interventions/:id/location', Incident.updateInterventionLocation); //auth.authentication, 
+router.patch('/interventions/:id/comment', Incident.updateInterventionComment); //auth.authentication, 
+router.patch('/interventions/:id/status', Incident.updateInterventionStatus);//auth.adminAuthentication, 
+router.delete('/interventions/:id', Incident.deleteInterventionRecord); //auth.authentication, 
 
 export default router;

@@ -11,27 +11,19 @@ import uuidv4 from 'uuid/v4';
  */
 export const createUser = (req, res) => {
 	const hashPassword = Helper.hashPassword(req.body.password);
-
-	if (!req.body.email || !req.body.password) {
-		res.status(400)
-			.json({
-				status: 400,
-				error: 'Email and pasword fields are required'
-			})
-	}
 	if (!Helper.isValidEmail(req.body.email)) {
 		res.status(400)
-			.json({
+			 .json({
 				status: 400,
 				error: 'Email is invalid'
 			})
 	}
 
 	const createQuery = `INSERT INTO users(
-	id, firstname, lastname, othernames, phone_number, email, username, password, is_admin)
-      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`;
+	firstname, lastname, othernames, phone_number, email, username, password, is_admin)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
 	const values = [
-		uuidv4(),
+		//uuidv4(),
 		req.body.firstname,
 		req.body.lastname,
 		req.body.othernames,
@@ -54,12 +46,13 @@ export const createUser = (req, res) => {
 					}]
 				});
 		})
-		.catch(error => res.status(400)
-			.json({
-				status: 400,
-				error: error.message
-			})
-		);
+		.catch((err) => {
+			res.status(400)
+				.json({
+					status: 400,
+					error: err.message
+				})
+		});
 };
 
 /**
@@ -106,12 +99,13 @@ export const login = (req, res) => {
 				}]
 			});
 		})
-		.catch(error => {
-			res.status(400).json({
-				status: 400,
-				error: error.message
-			})
-		})
+		.catch((err) => {
+			res.status(400)
+				.json({
+					status: 400,
+					error: err.message
+				})
+		});
 };
 
 
@@ -131,12 +125,13 @@ export const getAll = (req, res) => {
 				});
 			}
 		})
-		.catch(error => {
-			res.status(400).json({
-				status: 400,
-				error: error.message
-			})
-		})
+		.catch((err) => {
+			res.status(400)
+				.json({
+					status: 400,
+					error: err.message
+				})
+		});
 };
 
 export const deleteUser = (req, res) => {
@@ -153,7 +148,6 @@ export const deleteUser = (req, res) => {
 				});
 		})
 		.catch((err) => {
-			console.log(err)
 			res.status(404)
 				.json({
 					status: 404,
