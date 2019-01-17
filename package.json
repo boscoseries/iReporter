@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run migrate && nyc mocha -r @babel/register --exit --timeout 20000",
-    "start": "npm run create && nodemon -r @babel/register server/index.js",
+    "start": "npm run create && node -r @babel/register server/index.js",
     "create": "node server/models/userModel createUserTable && node server/models/incidentModel createIncidentTable",
     "drop": "node server/models/incidentModel dropIncidentTable && node server/models/userModel dropUserTable",
     "migrate": "npm run drop && npm run create",
