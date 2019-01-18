@@ -17,21 +17,11 @@ export const authentication = (req, res, next) => {
     } else {
       jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
         if (error) {
-          console.log(error)
           return res.status(401).json({
             status: 401,
             error: 'Authentication failed',
           });
-        } else {
-          const decodedId = decoded.user.id;
-          const userId = req.params.id || req.params.created_by;
-          if (decodedId !== userId) {
-            return res.status(401).json({
-              status: 401,
-              error: 'id do not match'
-            })
-          }
-        }   
+        }  
         return next();
       });
      };
@@ -40,7 +30,7 @@ export const authentication = (req, res, next) => {
 export const adminAuthentication = (req, res, next) => {
   const token = req.body.token || req.headers['x-access-token'];
   jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
-    if (decoded.username === jsevries) 
+    if (decoded.admin === true) 
     return next();
     else {
       return res.status(401)

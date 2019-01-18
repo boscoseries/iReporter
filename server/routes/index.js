@@ -21,9 +21,9 @@ router.use("/api/v1", incidents);
 router.use("/api/v1/auth", users);
 
 router.all('*', (req, res) => {
-	res.status(404).json({
-		status: 404,
-		error: 'Wrong Url'
+	res.status(400).json({
+		status: 400,
+		error: 'Invalid path supplied'
 	})
 })
 

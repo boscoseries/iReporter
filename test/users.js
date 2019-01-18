@@ -1,11 +1,20 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
+import helper from '../server/middlewares/helpers'
 import app from "../server";
 
 const should = chai.should();
 const expect = chai.expect;
 
 chai.use(chaiHttp);
+
+const user = {
+	id: 1,
+	username: "jbseries",
+	admin: true
+}
+
+let token = helper.generateToken(user);
 
 describe("USER ENDPOINTS", () => {
 	let userDetails;
@@ -24,13 +33,13 @@ describe("USER ENDPOINTS", () => {
 				lastname: "Ehdo",
 				othernames: "Pauhl",
 				phone_number: "08098983832",
-				username: "jsevries",
-				email: "jservies@gmail.com",
-				password: "jseviejnjns",
+				username: "jbseries",
+				email: "jbseries@gmail.com",
+				password: "jbseries",
 				is_admin: "true"
 			};
 				exec()
-				.end((err, res) => {
+					.end((err, res) => {
 					expect(err).to.equal(null);
 					expect(res.status).to.equal(201);
 					expect(res.body).to.have.property("status");
@@ -47,7 +56,7 @@ describe("USER ENDPOINTS", () => {
                 lastname: "Peter",
                 othernames: "Ose",
                 phone_number: "08076879789",
-                username: "jsevries",
+                username: "jbseries",
                 email: "paulpeter@gmail.com",
                 password: "paulpeter",
                 is_admin: "false"
@@ -69,6 +78,7 @@ describe("USER ENDPOINTS", () => {
 			chai
 				.request(app)
 				.get("/api/v1/auth/users")
+				.set('x-access-token', token)
 				.end((err, res) => {
 					expect(err).to.equal(null);
 					expect(res.status).to.equal(200);
@@ -100,13 +110,14 @@ describe("USER ENDPOINTS", () => {
 				return	chai
 					.request(app)
 					.post("/api/v1/auth/login")
+					.set('x-access-token', token)
 					.send(userDetails)
 				}
 
 			it("should validate a user with valid user details", (done) => {				
 				userDetails = { 
-					email: "jservies@gmail.com",
-					password: "jseviejnjns"
+					email: "jbseries@gmail.com",
+					password: "jbseries"
 				}
 					exec()
 					.end((err, res) => {
@@ -155,11 +166,12 @@ describe("USER ENDPOINTS", () => {
 			describe("DELETE /api/v1/auth/users", () => {
 				it("should delete the user with the supplied email", (done) => {
 	
-					let email = "jservies@gmail.com";
+					let email = "jbseries@gmail.com";
 					
 					chai
 						.request(app)
 						.delete("/api/v1/auth/users")
+						.set('x-access-token', token)
 						.send({email})
 						.end((err, res) => {
 							expect(res.status).to.equal(200);
@@ -174,10 +186,11 @@ describe("USER ENDPOINTS", () => {
 					chai
 						.request(app)
 						.delete("/api/v1/auth/users")
+						.set('x-access-token', token)
 						.send({email})
 						.end((err, res) => {
 							expect(err).to.equal(null);
-							expect(res.status).to.equal(404);
+							expect(res.status).to.equal(400);
 							expect(res.body).to.have.property("status");
 							expect(res.body).to.have.property("error");
 							expect(res.body.error).to.contain("undefined");

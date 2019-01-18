@@ -80,13 +80,13 @@ export const login = (req, res) => {
 		});
 	}
 	const loginQuery = 'SELECT * FROM users WHERE email = $1';
-	const inputEmail = [req.body.email]
-	db.query(loginQuery, inputEmail)
+	const email = [req.body.email]
+	db.query(loginQuery, email)
 		.then(result => {
 			if (!result.rows[0]) {
 				return res.status(400).json({
 					status: 400,
-					error: 'Email is Incorrect'
+					error: 'Email is Invalid'
 				});
 			}
 			if (!Helper.comparePassword(result.rows[0].password, req.body.password)) {
@@ -153,9 +153,9 @@ export const deleteUser = (req, res) => {
 				});
 		})
 		.catch((err) => {
-			res.status(404)
+			res.status(400)
 				.json({
-					status: 404,
+					status: 400,
 					error: err.message
 				})
 		});
