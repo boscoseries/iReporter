@@ -36,7 +36,12 @@ export const createUser = (req, res) => {
 
 	db.query(createQuery, values)
 		.then(result => {
-			const token = Helper.generateToken(result.rows[0].id);
+			const User = {
+				id: result.rows[0].id,
+				username: result.rows[0].username,
+				admin: result.rows[0].is_admin
+			};
+			const token = Helper.generateToken(User);
 			res.status(201)
 				.json({
 					status: 201,

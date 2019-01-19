@@ -3,9 +3,6 @@ import 'babel-polyfill';
 
 import uuidv4 from 'uuid/v4';
 
-
-
-
 /**
  * Create An Incident Record
  * @param {object} req - request

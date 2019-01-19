@@ -4,10 +4,10 @@ import * as auth from '../middlewares/auth';
 
 const router = express.Router();
 
-router.get('/users', User.getAll); //auth.authentication,
+router.get('/users', auth.adminAuthentication, User.getAll); //
 router.post('/signup', User.createUser); //auth.authentication,
-router.post('/login', User.login); // auth.authentication, , User.login
-router.delete('/users', User.deleteUser); // auth.authentication, , User.login
+router.post('/login', auth.authentication, User.login); //  User.login
+router.delete('/users', auth.authentication, User.deleteUser); // auth.authentication, , User.login
 
 
 

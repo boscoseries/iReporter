@@ -1,9 +1,4 @@
 import jwt from 'jsonwebtoken';
-import db from '../database/database';
-
-// import env from 'dotenv';
-
-// env.config();
 
   /**
    * Verify Token
@@ -22,35 +17,37 @@ export const authentication = (req, res, next) => {
     } else {
       jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
         if (error) {
+          console.log(error)
           return res.status(401).json({
             status: 401,
             error: 'Authentication failed',
           });
-        }
-        if (decoded) {
-        next();
-        }
-        
+        } else {
+          const decodedId = decoded.user.id;
+          const userId = req.params.id || req.params.created_by;
+          if (decodedId !== userId) {
+            return res.status(401).json({
+              status: 401,
+              error: 'id do not match'
+            })
+          }
+        }   
+        return next();
       });
-     }
-  }
+     };
+  };
 
 export const adminAuthentication = (req, res, next) => {
-  const loginQuery = `SELECT * FROM users WHERE is_admin = 'true'`;
-	db.query(loginQuery)
-		.then(result => {
-			if (!result.rows[0]) {
-				return res.status(401).json({ 
-					status: 401,
-					error: 'You are not allowed to access the route'
-				});
-      } 
-      else next();
-    })
-    .catch(error => res.status(400)
-			.json({
-				status: 400,
-				error: error.message
-			})
-		);
+  const token = req.body.token || req.headers['x-access-token'];
+  jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
+    if (decoded.username === jsevries) 
+    return next();
+    else {
+      return res.status(401)
+               .json({
+        status: 401,
+        error: 'You are not allowed to assess this route'
+    });
   };
+});
+};
