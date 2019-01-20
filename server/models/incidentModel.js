@@ -20,7 +20,7 @@ console.log(process.env.NODE_ENV);
 
 const pool = new Pool({
 	connectionString,
-	ssl: true,
+	//ssl: true,
 });
 
 pool.on('connect', () => {

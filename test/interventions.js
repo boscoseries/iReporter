@@ -66,7 +66,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 			chai
 				.request(app)
 				.post("/api/v1/interventions")
-				.set('x-access-token', adminToken)
+				.set('x-access-token', userToken)
 				.send(recordDetails)
 				.end((err, res) => {
 					expect(err).to.equal(null);
@@ -95,7 +95,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 			chai
 				.request(app)
 				.post("/api/v1/interventions")
-				.set('x-access-token', adminToken)
+				.set('x-access-token', userToken)
 				.send(recordDetails)
 				.end((err, res) => {
 					expect(err).to.equal(null);
@@ -192,7 +192,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 					chai
 						.request(app)
 						.get("/api/v1/interventions/1")
-						.set('x-access-token', adminToken)
+						.set('x-access-token', userToken)
 						.end((err, res) => {
 							expect(err).to.equal(null);
 							expect(res.status).to.equal(200);
@@ -208,7 +208,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 					chai
 						.request(app)
 						.get("/api/v1/interventions/5")
-						.set('x-access-token', adminToken)
+						.set('x-access-token', userToken)
 						.end((err, res) => {
 							expect(err).to.equal(null);
 							expect(res.status).to.equal(404);
@@ -227,7 +227,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 				chai
 					.request(app)
 					.patch("/api/v1/interventions/1/location")
-					.set('x-access-token', adminToken)
+					.set('x-access-token', userToken)
 					.send({location: "Abuja"})
 					.end((err, res) => {
 						expect(err).to.equal(null);
@@ -244,7 +244,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 				chai
 						.request(app)
 						.patch("/api/v1/interventions/5/location")
-						.set('x-access-token', adminToken)
+						.set('x-access-token', userToken)
 						.send({location: "Owerri"})
 						.end((err, res) => {
 							expect(err).to.equal(null);
@@ -264,7 +264,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 				chai
 					.request(app)
 					.patch("/api/v1/interventions/1/comment")
-					.set('x-access-token', adminToken)
+					.set('x-access-token', userToken)
 					.send({comment: "available"})
 					.end((err, res) => {
 						expect(err).to.equal(null);
@@ -281,7 +281,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 				chai
 						.request(app)
 						.patch("/api/v1/interventions/5/comment")
-						.set('x-access-token', adminToken)
+						.set('x-access-token', userToken)
 						.send({comment: "new comment"})
 						.end((err, res) => {
 							expect(err).to.equal(null);
@@ -354,7 +354,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 				chai
 						.request(app)
 						.delete("/api/v1/interventions/5")
-						.set('x-access-token', adminToken)
+						.set('x-access-token', userToken)
 						.end((err, res) => {
 							expect(err).to.equal(null);
 							expect(res.status).to.equal(404);
@@ -371,7 +371,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 				chai
 					.request(app)
 					.delete("/api/v1/interventions/1")
-					.set('x-access-token', adminToken)
+					.set('x-access-token', userToken)
 					.end((err, res) => {
 						expect(err).to.equal(null);
 						expect(res.status).to.equal(200);
