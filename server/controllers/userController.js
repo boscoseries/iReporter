@@ -31,7 +31,7 @@ export const createUser = (req, res) => {
 		req.body.email,
 		req.body.username,
 		hashPassword,
-		req.body.is_admin
+		req.body.is_admin || false
 	]
 
 	db.query(createQuery, values)

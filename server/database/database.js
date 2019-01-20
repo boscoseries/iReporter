@@ -1,26 +1,26 @@
 const { Pool } = require('pg');
-const env = require('dotenv');
-
-env.config();
+const env = require('dotenv').config();
 
 let connectionString;
+let ssl;
 
 switch (process.env.NODE_ENV) {
-  case 'Test':
-		connectionString=process.env.TEST_DATABASE_URL
-    break;
   case 'Production':
 		connectionString=process.env.PROD_DATABASE_URL
+		ssl=true
     break;
   case 'Development':
 		connectionString=process.env.DEV_DATABASE_URL
-    break;
+		ssl=false
+		break;
+	default:
+    throw new Error('Specify a valid process.env.NODE_ENV');
 }
 console.log(process.env.NODE_ENV);
 
 const pool = new Pool({
 	connectionString,
-	//ssl: true,
+	ssl,
 });
 
 pool.on('connect', () => {

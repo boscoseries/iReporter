@@ -1,31 +1,4 @@
-const { Pool } = require('pg');
-const env = require('dotenv');
-
-env.config();
-
-let connectionString;
-
-switch (process.env.NODE_ENV) {
-  case 'Test':
-		connectionString=process.env.TEST_DATABASE_URL
-    break;
-  case 'Production':
-		connectionString=process.env.PROD_DATABASE_URL
-    break;
-  case 'Development':
-		connectionString=process.env.DEV_DATABASE_URL
-    break;
-}
-console.log(process.env.NODE_ENV);
-
-const pool = new Pool({
-	connectionString,
-	//ssl: true,
-});
-
-pool.on('connect', () => {
-	console.log('connected to the database');
-});
+const db = require('../database/database');
 
 /**
  * Create Tables
@@ -45,14 +18,14 @@ const createIncidentTable = () => {
 			FOREIGN KEY (created_by) REFERENCES users (id) ON DELETE CASCADE
       )`;
 
-	pool.query(queryText)
-		.then((res) => {
-			console.log(res);
-			pool.end();
+	db.query(queryText)
+		.then(result => {
+			console.log(result);
+			//pool.end();
 		})
-		.catch((err) => {
-			console.log(err);
-			pool.end();
+		.catch(error => {
+			console.log(error);
+			//pool.end();
 		});
 };
 
@@ -61,21 +34,16 @@ const createIncidentTable = () => {
  */
 const dropIncidentTable = () => {
 	const queryText = 'DROP TABLE IF EXISTS incidents';
-	pool.query(queryText)
-		.then((res) => {
-			console.log(res);
-			pool.end();
+	db.query(queryText)
+		.then(result => {
+			console.log(result);
+			//pool.end();
 		})
-		.catch((err) => {
-			console.log(err);
-			pool.end();
+		.catch(error => {
+			console.log(error);
+			//pool.end();
 		});
 };
-
-pool.on('remove', () => {
-	console.log('client removed');
-	process.exit(0);
-});
 
 module.exports = {
 	createIncidentTable,
