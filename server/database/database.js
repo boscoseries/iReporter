@@ -18,7 +18,10 @@ switch (process.env.NODE_ENV) {
 }
 console.log(process.env.NODE_ENV);
 
-const pool = new Pool({connectionString});
+const pool = new Pool({
+	connectionString,
+	ssl: true,
+});
 
 pool.on('connect', () => {
 	console.log('connected to the database');
