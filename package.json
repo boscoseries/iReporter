@@ -2,6 +2,9 @@
   "name": "i-reporter",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "10.x"
+  },
   "main": "index.js",
   "scripts": {
     "test": "npm run migrate && nyc mocha -r @babel/register --exit --timeout 20000",
