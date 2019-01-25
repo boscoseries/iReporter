@@ -11,7 +11,7 @@ const router = express.Router();
 /*******************REDFLAG ENDPOINTS*******************/
 
 router.get('/red-flags', getAllRedflags); // 
-router.get('/red-flags/:id', authentication, getOneRedflag); // authentication, adminAuthentication, 
+router.get('/red-flags/:id', getOneRedflag); // authentication, adminAuthentication, 
 router.post('/red-flags', create); //checkField,  authentication, 
 router.patch('/red-flags/:id/location', updateRedflagLocation); // authentication, 
 router.patch('/red-flags/:id/comment', updateRedflagComment); //authentication, 
