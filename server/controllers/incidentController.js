@@ -1,5 +1,4 @@
 import db from '../database/database';
-import 'babel-polyfill';
 
 import uuidv4 from 'uuid/v4';
 
@@ -55,7 +54,7 @@ export const create = (req, res) => {
 					});
 				})
 				.catch((err) => {
-					res.status(500)
+					return	res.status(500)
 					.json({
 						status: 500,
 						error: err.message
@@ -368,7 +367,6 @@ export const updateInterventionStatus = (req, res) => {
 				});
 		})
 		.catch((err) => {
-			console.log(err)
 			return res.status(500)
 				.json({
 					status: 500,

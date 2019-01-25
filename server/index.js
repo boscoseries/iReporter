@@ -1,7 +1,10 @@
+import dotenv from 'dotenv'
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import routes from './routes';
+
+dotenv.config();
 
 const app = express();
 
@@ -13,7 +16,7 @@ app.use(cors());
 
 app.use(routes);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
 	console.log(`Listening on port ${port} ...`);

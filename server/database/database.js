@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
-const env = require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 
 let connectionString;
 let ssl;
