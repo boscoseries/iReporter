@@ -13,19 +13,23 @@ switch (process.env.NODE_ENV) {
 		connectionString=process.env.DEV_DATABASE_URL
 		ssl=false
 		break;
+	case 'Test':
+		connectionString=process.env.TEST_DATABASE_URL
+		ssl=false
+		break;
 	default:
     throw new Error('Specify a valid process.env.NODE_ENV');
 }
-console.log(process.env.NODE_ENV);
+console.log(`connected in ${process.env.NODE_ENV} environment`);
 
 const pool = new Pool({
 	connectionString,
 	ssl,
 });
 
-pool.on('connect', () => {
-	console.log('connected to the database');
-});
+// pool.on('connect', () => {
+// 	console.log('connected to the database');
+// });
 
 module.exports = {
 	/**

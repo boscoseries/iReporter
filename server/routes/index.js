@@ -1,3 +1,4 @@
+import path from 'path';
 import express from "express";
 import incidents from './incidentRoute';
 import users from './userRoute';
@@ -6,9 +7,7 @@ const router = express.Router();
 
 // fetch homepage
 router.get("/", (req, res) => {
-	res
-	.status(200)
-	.json("Welcome to iReporter");
+	res.redirect('/docs.html')
 });
 
 router.get("/api/v1", (req, res) => {
