@@ -36,9 +36,9 @@ export const create = (req, res) => {
 				);
 			})
 			.catch((err) => {
-				return res.status(400)
+				return res.status(500)
 				.json({
-					status: 400,
+					status: 500,
 					error: err.message
 				})
 			});
@@ -55,9 +55,9 @@ export const create = (req, res) => {
 					});
 				})
 				.catch((err) => {
-					res.status(400)
+					res.status(500)
 					.json({
-						status: 400,
+						status: 500,
 						error: err.message
 					})
 				});
@@ -86,9 +86,9 @@ export const getAllRedflags = (req, res) => {
 			}
 		})
 		.catch((err) => {
-			return res.status(404)
+			return res.status(500)
 				.json({
-					status: 404,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -118,9 +118,9 @@ export const getAllInterventions = (req, res) => {
 		}
 	})
 	.catch((err) => {
-		return res.status(404)
+		return res.status(500)
 			.json({
-				status: 404,
+				status: 500,
 				error: err.message
 			})
 	});
@@ -152,9 +152,9 @@ export const getOneRedflag = (req, res) => {
 			}
 		})
 		.catch((err) => {
-			return res.status(404)
+			return res.status(500)
 				.json({
-					status: 404,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -186,9 +186,9 @@ export const getOneIntervention = (req, res) => {
 		}
 		})
 		.catch((err) => {
-			return res.status(404)
+			return res.status(500)
 				.json({
-					status: 404,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -216,9 +216,9 @@ export const updateRedflagLocation = (req, res) => {
 							});
 					})
 		.catch((err) => {
-			return res.status(404)
+			return res.status(500)
 				.json({
-					status: 404,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -246,9 +246,9 @@ export const updateInterventionLocation = (req, res) => {
 					})
 		.catch((err) => {
 			console.log(err)
-			return res.status(404)
+			return res.status(500)
 				.json({
-					status: 404,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -277,9 +277,9 @@ export const updateRedflagComment = (req, res) => {
 					})
 		.catch((err) => {
 			console.log(err)
-			return res.status(404)
+			return res.status(500)
 				.json({
-					status: 404,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -308,9 +308,9 @@ export const updateInterventionComment = (req, res) => {
 		})
 		.catch((err) => {
 			console.log(err)
-			return res.status(404)
+			return res.status(500)
 				.json({
-					status: 404,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -339,9 +339,9 @@ export const updateRedflagStatus = (req, res) => {
 					})
 		.catch((err) => {
 			console.log(err)
-			return res.status(404)
+			return res.status(500)
 				.json({
-					status: 404,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -369,9 +369,9 @@ export const updateInterventionStatus = (req, res) => {
 		})
 		.catch((err) => {
 			console.log(err)
-			return res.status(404)
+			return res.status(500)
 				.json({
-					status: 404,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -399,9 +399,9 @@ export const deleteRedflagRecord = (req, res) => {
 		})
 		.catch((err) => {
 			console.log(err)
-			return res.status(404)
+			return res.status(500)
 				.json({
-					status: 404,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -428,9 +428,9 @@ export const deleteInterventionRecord = (req, res) => {
 		})
 		.catch((err) => {
 			console.log(err)
-			return res.status(404)
+			return res.status(500)
 				.json({
-					status: 404,
+					status: 500,
 					error: err.message
 				})
 		});

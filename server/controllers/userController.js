@@ -52,10 +52,10 @@ export const createUser = (req, res) => {
 				});
 		})
 		.catch((err) => {
-			res.status(400)
+			res.status(500)
 				.json({
-					status: 400,
-					error: err.message
+					status: 500,
+					error: err
 				})
 		});
 };
@@ -105,9 +105,9 @@ export const login = (req, res) => {
 			});
 		})
 		.catch((err) => {
-			res.status(400)
+			res.status(500)
 				.json({
-					status: 400,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -131,9 +131,9 @@ export const getAll = (req, res) => {
 			}
 		})
 		.catch((err) => {
-			res.status(400)
+			res.status(500)
 				.json({
-					status: 400,
+					status: 500,
 					error: err.message
 				})
 		});
@@ -153,9 +153,9 @@ export const deleteUser = (req, res) => {
 				});
 		})
 		.catch((err) => {
-			res.status(400)
+			res.status(500)
 				.json({
-					status: 400,
+					status: 500,
 					error: err.message
 				})
 		});
