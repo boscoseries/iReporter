@@ -11,7 +11,7 @@
     "test": "cross-env NODE_ENV=Test nyc mocha -r babel-register --exit --timeout 20000",
     "clean": "rm -rf dist && mkdir dist",
     "build": "npm run clean && babel server -d dist",
-    "start": "npm run build && node dist/index",
+    "start": "npm run build && node server/index",
     "migrate": "node server/models/tables.js",
     "coverage": "nyc reporter=lcov --reporter=text-lcov | coveralls"
   },
