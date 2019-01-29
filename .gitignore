@@ -3,3 +3,6 @@ node_modules
 .env
 .vscode
 package-lock.json
+dist
+.vscode
+package-lock.json
