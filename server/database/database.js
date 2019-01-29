@@ -7,7 +7,7 @@ let ssl;
 
 switch (process.env.NODE_ENV) {
   case 'Production':
-		connectionString=process.env.PROD_DATABASE_URL
+		connectionString=process.env.DATABASE_URL
 		ssl=true
     break;
   case 'Development':
