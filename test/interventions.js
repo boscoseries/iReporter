@@ -1,7 +1,7 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
-import app from "../server";
-import helper from '../server/middlewares/helpers'
+import app from "../dist";
+import helper from '../dist/middlewares/helpers'
 
 const should = chai.should();
 const expect = chai.expect;
@@ -99,7 +99,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 				.send(recordDetails)
 				.end((err, res) => {
 					expect(err).to.equal(null);
-					expect(res.status).to.equal(400);
+					expect(res.status).to.equal(500);
 					expect(res.body).to.have.property("status");
 					expect(res.body).to.have.property("error");
 					done();
@@ -248,8 +248,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 						.send({location: "Owerri"})
 						.end((err, res) => {
 							expect(err).to.equal(null);
-							expect(res.status).to.equal(404);
-							expect(res.status).to.equal(404);
+							expect(res.status).to.equal(500);
 							expect(res.body).to.have.property("status");
 							expect(res.body).to.have.property("error");
 							expect(res.body.error).to.contain("undefined");
@@ -285,8 +284,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 						.send({comment: "new comment"})
 						.end((err, res) => {
 							expect(err).to.equal(null);
-							expect(res.status).to.equal(404);
-							expect(res.status).to.equal(404);
+							expect(res.status).to.equal(500);
 							expect(res.body).to.have.property("status");
 							expect(res.body).to.have.property("error");
 							expect(res.body.error).to.contain("undefined");
@@ -338,8 +336,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 						.send({status: "resolved"})
 						.end((err, res) => {
 							expect(err).to.equal(null);
-							expect(res.status).to.equal(404);
-							expect(res.status).to.equal(404);
+							expect(res.status).to.equal(500);
 							expect(res.body).to.have.property("status");
 							expect(res.body).to.have.property("error");
 							//expect(res.body.error).to.contain("undefined");
@@ -357,8 +354,7 @@ describe("INTERVENTION ENDPOINTS", () => {
 						.set('x-access-token', userToken)
 						.end((err, res) => {
 							expect(err).to.equal(null);
-							expect(res.status).to.equal(404);
-							expect(res.status).to.equal(404);
+							expect(res.status).to.equal(500);
 							expect(res.body).to.have.property("status");
 							expect(res.body).to.have.property("error");
 							expect(res.body.error).to.contain("undefined");

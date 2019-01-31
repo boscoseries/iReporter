@@ -1,7 +1,7 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
-import helper from '../server/middlewares/helpers'
-import app from "../server";
+import helper from '../dist/middlewares/helpers'
+import app from "../dist";
 
 const should = chai.should();
 const expect = chai.expect;
@@ -101,7 +101,7 @@ describe("REDFLAG ENDPOINTS", () => {
 					.send(recordDetails)
 					.end((err, res) => {
 					expect(err).to.equal(null);
-					expect(res.status).to.equal(400);
+					expect(res.status).to.equal(500);
 					expect(res.body).to.have.property("status");
 					done();
 				});
@@ -197,7 +197,6 @@ describe("REDFLAG ENDPOINTS", () => {
 						.end((err, res) => {
 							expect(err).to.equal(null);
 							expect(res.status).to.equal(404);
-							expect(res.status).to.equal(404);
 							expect(res.body).to.have.property("status");
 							expect(res.body).to.have.property("error");
 							expect(res.body.error).to.contain("No record available");
@@ -233,8 +232,7 @@ describe("REDFLAG ENDPOINTS", () => {
 						.send({location: "Owerri"})
 						.end((err, res) => {
 							expect(err).to.equal(null);
-							expect(res.status).to.equal(404);
-							expect(res.status).to.equal(404);
+							expect(res.status).to.equal(500);
 							expect(res.body).to.have.property("status");
 							expect(res.body).to.have.property("error");
 							//expect(res.body.error).to.contain("undefined");
@@ -270,7 +268,7 @@ describe("REDFLAG ENDPOINTS", () => {
 						.send({comment: "new comment"})
 						.end((err, res) => {
 							expect(err).to.equal(null);
-							expect(res.status).to.equal(404);
+							expect(res.status).to.equal(500);
 							expect(res.body).to.have.property("status");
 							expect(res.body).to.have.property("error");
 							expect(res.body.error).to.contain("undefined");
@@ -322,8 +320,7 @@ describe("REDFLAG ENDPOINTS", () => {
 						.send({status: "resolved"})
 						.end((err, res) => {
 							expect(err).to.equal(null);
-							expect(res.status).to.equal(404);
-							expect(res.status).to.equal(404);
+							expect(res.status).to.equal(500);
 							expect(res.body).to.have.property("status");
 							expect(res.body).to.have.property("error");
 							expect(res.body.error).to.contain("undefined");
